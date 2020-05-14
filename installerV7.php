@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ###############################################################
-# MMTECHWORKS WEBSITE BUILDER - MMTW20200511.0522
+# MMTECHWORKS WEBSITE BUILDER - MMTW20200514.0732
 ###############################################################
 # Visit DigitalCrazy.biz
 ###############################################################
@@ -95,7 +95,7 @@ copy($sdr .'/install/indx2root.php',     $sdr.'/install/PREindex.php');
 copy($sdr .'/install/.htaccss2root.txt', $sdr.'/install/.PREhtaccess');
 copy($sdr .'/install/tplwpc0nfig.php',   $sdr.'/install/PREwp-config.php');
 copy($sdr .'/install/tplpinc2et.php',    $sdr.'/install/PREmmtw-pincset.php');
-copy($sdr .'/install/db02.sql',          $sdr.'/install/PREdb02.sql');
+copy($sdr .'/install/db02tpl.sql',       $sdr.'/install/PREdb02.sql');
 echo "<br/>Checks::::::::::::::::::::::::::::::::::::::::::::::::::::::<br/>";
 ############################################################################
 while ($cppazzok) {
@@ -242,16 +242,14 @@ body {font-family: Arial,sans-serif; font-size:1.0em;}
 <!-- ===================================================Capture Form  -->
 <!-- ===================================================Capture Form  -->
 <div style="font-family: Raleway, sans-serif;text-align:center;width:70%; margin: auto;">
-<div style="color:#0099ff"><h2><?php echo strtoupper("$doomain") ?><br/>Your One-click Website Setup</h2></div>
+<div style="color:#0099ff"><h3><?php echo strtoupper("$doomain") ?><br/>Your One-click Website Setup</h3></div>
 </div>
 <form method="post">
 <table cellpadding="7" cellspacing="7" border="0" style="outline:#99CCff dotted medium; margin-left:auto;margin-right:auto;width:80%; height: 430px;">
 <tbody>
 
 <tr><td colspan="2">
-<?php } ?>
-
-<?php 
+<?php } 
 echo "<br>dbuser: $dbuser";
 ?>
 </td></tr>
@@ -273,7 +271,7 @@ Sometimes spam filters block automated emails, so if you do not find the emails 
 <br/><span style="font-size: medium; "><strong>Your Domain Name:</strong></span><br/>
 <br/></td>
 <td width="252">
-<br/><span style="font-size: medium;"><strong>&nbsp;&nbsp;<?php echo htmlentities($doomain)."<br>$_SERVER['SERVER_PROTOCOL']/$_SERVER['PROTOCOL']/$_SERVER['HTTPS']"; ?></strong></span>
+<br/><span style="font-size: medium;"><strong>&nbsp;&nbsp;<?php echo htmlentities($doomain).'<br>&nbsp;&nbsp;'.$_SERVER["SERVER_PROTOCOL"].' : '.$_SERVER["HTTPS"]; ?></strong></span>
 <br/><input name="idomain" type="hidden" value="<?php echo htmlentities($doomain); ?>" />
 <br/></td>
 </tr>
@@ -292,7 +290,7 @@ Sometimes spam filters block automated emails, so if you do not find the emails 
 <br />Your account username that appears in your Hosting Account Welcome email.</span><br />
 <br /></td>
 <td>
-<br/><br/><span style="font-size: medium;" ><strong>&nbsp;&nbsp;<?php echo str_replace(substr($cpuser,3,4), "****", htmlentities($cpuser)); ?></strong></span>
+<br/><br/><span style="font-size: medium;" ><strong>&nbsp;&nbsp;<?php echo str_replace(substr($cpuser,4,4), "****", htmlentities($cpuser)); ?></strong></span>
 <input name="icpuser" type="hidden" value="<?php echo htmlentities($cpuser); ?>" />
 <br/></td>
 </tr>
@@ -304,7 +302,7 @@ Sometimes spam filters block automated emails, so if you do not find the emails 
 Enter the account password that appears in your Hosting Account Welcome email.</span><br />
 <br /></td>
 <td>
-<br /><span>&nbsp;<input style="font-size: medium; font-weight:600;" name="icppazz" size="30" type="password" 
+<br /><span>&nbsp;<input style="font-size: medium; font-weight:600;" name="icppazz" size="30" ttype="password" 
 value="ch4ng3m3EMLn0w!" /></span><br /></td>
 </tr>
 <tr>
@@ -317,4 +315,3 @@ value="ch4ng3m3EMLn0w!" /></span><br /></td>
 </form>
 </body>
 </html>
-<!-- ===================================================Capture Form  -->

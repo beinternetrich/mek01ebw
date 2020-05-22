@@ -1,6 +1,6 @@
 <?php
 ###############################################################
-# Recursive Text Replacer 2.01(MMTW)
+# Recursive Text Replacer 2.02(MMTW)
 ###############################################################
 # Visit http://www.zubrag.com/scripts/ for updates
 ############################################################### 
@@ -38,7 +38,7 @@ $webphonePRE  = '&#043;&#052;&#052;&#040;&#048;&#041;&#055;&#055;&#050;&#050;&#0
 $webphone     = 'W3BPH0NE';
 
 $cppazzPRE    = 'Ll3QqYN!y0U*2$m';
-$cppazz       = 'CPP455';   //$_GET['cpz'];
+$cppazz       = 'CPP455';   //$_GET['cpk'];
 
 $dbpazzPRE    = 'Ll3QqYN!y0U*2$m'; 
 $dbpazz       = 'DBP455';   //$_GET['dpz'];
@@ -47,7 +47,7 @@ $dbsufxPRE    = '_dc1911j';
 $dbsufx       = '_DBSUFX';  //$_GET['dbu'];
 
 $doomsslPRE   = 'https://CPH0ST';
-$doomssl      =  'https://CPH0ST'; 
+$doomssl      = 'https://CPH0ST'; 
 //--------------------------------------------
 
 $stime = time();
@@ -70,32 +70,31 @@ $dbpazzPRE    => $dbpazz,
 $dbsufxPRE    => $dbsufx,
 $doomsslPRE   => $doomssl);
 
-$reportto = "mitchymitchy"."33@gm"."ail.com";
+//$reportto = "mitchymitchy"."33@gm"."ail.com";
 define('RECURSE',true);
 // _________________________________________________________________ //
-
 if (!file_exists($startpath)) {
   die("Folder \"" . $startpath . "\" does not exist.");
 }
 dir_replace($startpath);     // start replacement
-$etime = time();             // record end time
-$headers  = "MIME-Version: 1.0\r\n";  // setup message and email results
-$headers .= "Content-type: text/plain; charset=\"us-ascii\"\r\n";
-$headers .= "From: "   . $reportto . "\r\n";
-$headers .= "Reply-To: " . $reportto . "\r\n";
-$headers .= 'X-Mailer: PHP/' . phpversion();
-$message = "Mitch,
- Replacement script was run. Please see results below:
- Files processed: $files_processed
- Files updated: $files_updated
- Files not updated (error ocurred): $files_not_updated
- Processing time: " . date('i:s',$etime - $stime);
-if ($reportto != '') {          // send email @
-  mail($reportto,               // TO email
-        'PRE Replace results',  // subject
-        $message . '\r\n' . $msgrepl,   // email text
-        $headers);              // headers
-}
+//$etime = time();             // record end time
+//$headers  = "MIME-Version: 1.0\r\n";  // setup message and email results
+//$headers .= "Content-type: text/plain; charset=\"us-ascii\"\r\n";
+//$headers .= "From: "    . $reportto . "\r\n";
+//$headers .= "Reply-To:" . $reportto . "\r\n";
+//$headers .= 'X-Mailer: PHP/' . phpversion();
+//$message = "Mitch,
+// Replacement script was run. Please see results below:
+// Files processed: $files_processed
+// Files updated: $files_updated
+// Files not updated (error ocurred): $files_not_updated
+// Processing time: " . date('i:s',$etime - $stime);
+//if ($reportto != '') {          // send email @
+//  mail($reportto,               // TO email
+//        'PRE Replace results',  // subject
+//        $message . '\r\n' . $msgrepl,   // email text
+//        $headers);              // headers
+//}
 
 // recurse folders
 function dir_replace ($dirname, $recursive = RECURSE) {
@@ -107,15 +106,13 @@ function dir_replace ($dirname, $recursive = RECURSE) {
           dir_replace($dirname.'/'.$file);
         }
       } else if (
-//	  fnmatch('wp-config.php',    $file) ||
-//	  fnmatch('mmtw-pincset.php', $file) || 
 	  fnmatch('PREwp-config.php',    $file) ||
 	  fnmatch('PREmmtw-pincset.php', $file) ||
-	  fnmatch('PREdb02.sql', $file)) {
+	  fnmatch('PREdb.sql', $file)) {
 		  if (fnmatch('*cp_PREsearchreplOLDsite.php', $file)) {
 		  }	else {
 				file_replace($dirname.'/'.$file);
-				echo "<br>File_replace (L113) $dirname $file now";
+//				echo "<br>File_replace (L113) $dirname $file now";
 	  			}
 		  }
     }
@@ -155,13 +152,11 @@ function file_replace ($filename) {
 	if ($f) {
       @fputs($f,$txt);                             // save file contents
       @fclose($f);
-	  $msgrepl .= "<br>Updated file ".$filename."\r\n";
-	  echo "<br>(L152) $msgrepl";
+      $msgrepl .= "<br>Updated file ".$filename."\r\n";
       $files_updated++;                            // increment updated files counter
     }
     else {
       $msgrepl .= "<br>Could not update file ".$filename.". Check permissions\r\n";
-	  echo "<br>(L157) $msgrepl";
       $files_not_updated++;
     }
   }// if ($update)
@@ -170,14 +165,10 @@ function file_replace ($filename) {
 function str_replace_assoc($array,$string){
     $from_array = array();
     $to_array = array();
-
-   
     foreach($array as $k => $v){
         $from_array[] = $k;
         $to_array[] = $v;
     }
     return str_replace($from_array,$to_array,$string);
 }
-// echo nl2br($message . '<br/>' . $msgrepl);   // if script runs in browser, output to browser too.
-// header("Location: http://$doomain/install/cp_create_bizemail.php?cpz=$cppazz&epz=ch4ng3m3EMLn0w!");
 ?>

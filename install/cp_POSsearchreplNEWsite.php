@@ -1,6 +1,6 @@
 <?php
 ###############################################################
-# Recursive Text Replacer 1.0
+# Recursive Text Replacer 2.02
 ###############################################################
 # Visit http://www.zubrag.com/scripts/ for updates
 ############################################################### 
@@ -26,22 +26,23 @@ $htadoomain   = str_replace(".", "\.", $_SERVER['HTTP_HOST']);
 $doomainPRE   = 'CPH0ST'; 
 $doomain      = strtolower($_SERVER['HTTP_HOST']);
 $webtitlePRE  = 'W3BTITLE'; 
-$webtitle     = ucwords($_GET['wbt']); //ucfirst ($_GET['wbt']);
+$webtitle     = str_replace('+', ' ', ucwords($_GET['wbt']));
 $webphonePRE  = 'W3BPH0NE'; 
 $webphone     = '+44(0)7123456789';
 $cppazzPRE    = 'CPP455';
-$cppazz       = $_GET['cpz'];
+$cppazz       = $_GET['cpk'];
 $dbpazzPRE    = 'DBP455';  
-$dbpazz       = $_GET['dpz'];
+$dbpazz       = $_GET['dpz'];  //'Ll3QrYm!y0U*2M$'; //
 $dbsufxPRE    = '_DBSUFX';  
-$dbsufx       = '_'.$_GET['dbu'];
+$dbsufx       = '_'.$_GET['dbx'];
 //$doomsslPRE   = 'http://CPH0ST';
 //$doomssl      = 'http?://CPH0ST'; 
 //--------------------------------------------
-echo "<br/>Checks::IN::POST::SR:::::::::::::::::::::::::::::::::::::::::::::::::::::::<br/>";
-echo "<br>cpz="   .$cppazz;
-echo "<br>dpz="   .$dbpazz;
-echo "<br>dbu="   .$dbsufx."<br/>";
+
+//echo "<br/>Checks::IN::POST::SR:::::::::::::::::::::::::::::::::::::::::::::::::::::::<br/>";
+//echo "<br>cpz="   .$cppazz;
+//echo "<br>dpz="   .$dbpazz;
+//echo "<br>dbx="   .$dbsufx."<br/>";
 //--------------------------------------------
 $stime = time();
 $files_processed = 0;
@@ -62,7 +63,7 @@ $cppazzPRE    => $cppazz,
 $dbpazzPRE    => $dbpazz,
 $dbsufxPRE    => $dbsufx);
   
-$reportto = "mitchymitchy"."33@gm"."ail.com";
+//$reportto = "mitchymitchy"."33@gm"."ail.com";
 define('RECURSE',true);
 // _________________________________________________________________ //
 
@@ -70,25 +71,25 @@ if (!file_exists($startpath)) {
   die("Folder \"" . $startpath . "\" does not exist.");
 }
 dir_replace($startpath);     // start replacement
-$etime = time();             // record end time
-$headers  = "MIME-Version: 1.0\r\n";  // setup message and email results
-$headers .= "Content-type: text/plain; charset=\"us-ascii\"\r\n";
-$headers .= "From: " . $reportto . "\r\n";
-$headers .= "Reply-To: " . $reportto . "\r\n";
-$headers .= 'X-Mailer: PHP/' . phpversion();
-$message = "Mitch,
- Replacement script was run. Please see results below:
- Files processed: $files_processed
- Files updated: $files_updated
- Files not updated (error ocurred): $files_not_updated
- Processing time: " . date('i:s',$etime - $stime);
-
-if ($reportto != '') {          // send email @
-  mail($reportto,               // TO email
-        'POST Replace results', // subject
-        $message . '\r\n' . $msgrepl,   // email text
-        $headers);              // headers
-}
+//$etime = time();             // record end time
+//$headers  = "MIME-Version: 1.0\r\n";  // setup message and email results
+//$headers .= "Content-type: text/plain; charset=\"us-ascii\"\r\n";
+//$headers .= "From: " . $reportto . "\r\n";
+//$headers .= "Reply-To: " . $reportto . "\r\n";
+//$headers .= 'X-Mailer: PHP/' . phpversion();
+//$message = "Mitch,
+// Replacement script was run. Please see results below:
+// Files processed: $files_processed
+// Files updated: $files_updated
+// Files not updated (error ocurred): $files_not_updated
+// Processing time: " . date('i:s',$etime - $stime);
+//
+//if ($reportto != '') {          // send email @
+//  mail($reportto,               // TO email
+//        'POST Replace results', // subject
+//        $message . '\r\n' . $msgrepl,   // email text
+//        $headers);              // headers
+//}
 //-------------------------------------
 // recurse folders
 function dir_replace ($dirname, $recursive = RECURSE) {
@@ -100,11 +101,9 @@ function dir_replace ($dirname, $recursive = RECURSE) {
           dir_replace($dirname.'/'.$file);
         }
       } else if (
-//	  fnmatch('wp-config.php',    $file) ||
-//	  fnmatch('mmtw-pincset.php', $file) ||
 	  fnmatch('PREwp-config.php',    $file) ||
 	  fnmatch('PREmmtw-pincset.php', $file) ||
-	  fnmatch('PREdb02.sql', $file)) {
+	  fnmatch('PREdb.sql', $file)) {
 		  if (fnmatch('*cp_POSsearchreplNEWsite.php', $file)) {
 		  }	else {
 				file_replace($dirname.'/'.$file);
@@ -140,12 +139,10 @@ function file_replace ($filename) {
       @fputs($f,$txt);                             // save file contents
       @fclose($f);
 	  $msgrepl .= "<br>Updated file ".$filename."\r\n";
-	  echo "<br>(L132) $msgrepl";
       $files_updated++;                            // increment updated files counter
     }
     else {
       $msgrepl .= "<br>Could not update file ".$filename.". Check permissions\r\n";
-	  echo "<br>(L137) $msgrepl";
       $files_not_updated++;
     }
   }// if ($update)
@@ -161,7 +158,4 @@ function str_replace_assoc($array,$string){
     }
     return str_replace($from_array,$to_array,$string);
 }
-// _________________________________________________________________ //
-// echo nl2br($message . '<br/>' . $msgrepl);   // if script runs in browser, output to browser too.
-// header("Location: http://$doomain/install/cp_create_bizemail.php?cpz=$cppazz&epz=ch4ng3m3EMLn0w!");
 ?>

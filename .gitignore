@@ -1,5 +1,6 @@
 *.log
 *.zip
 /dump/
+/install/dump/
 /_notes/
 *.yml

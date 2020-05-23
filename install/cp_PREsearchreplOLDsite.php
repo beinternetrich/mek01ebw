@@ -1,6 +1,6 @@
-<?php
+ <?php
 ###############################################################
-# Recursive Text Replacer 2.02(MMTW)
+# Recursive Text Replacer 2.03(MMTW)
 ###############################################################
 # Visit http://www.zubrag.com/scripts/ for updates
 ############################################################### 
@@ -10,14 +10,17 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 // Init Vars
 $startpath    = $_SERVER['DOCUMENT_ROOT'];
-$sepdirhome   = explode("/", $_SERVER['DOCUMENT_ROOT']);
-$dirhomePRE   = 'home';
-$dirhome      = 'HOM3D1R';   //strtolower($sepdirhome[0]);
-$tmpstring1   = str_replace($dirhome."/", "", $_SERVER['DOCUMENT_ROOT']);
-$tmpstring2   = str_replace("/public_html", "", $tmpstring1);
+$sepdirhome   = explode("/", strtolower($_SERVER['DOCUMENT_ROOT']));
+
+$dirhomef1PRE = '/home/plrjatkj';
+$dirhomef1    = '/HOM3D1R/CPUS3R';   //strtolower($sepdirhome[0]);
+$dirhomef2PRE = '/home\\/plrjatkj';
+$dirhomef2    = '/HOM3D1R\\/CPUS3R';   //strtolower($sepdirhome[0]);
+//$tmpstring1   = str_replace($dirhome."/", "", $_SERVER['DOCUMENT_ROOT']);
+//$tmpstring2   = str_replace("/public_html", "", $tmpstring1);
 
 $cpuserPRE    = 'plrjatkj'; 
-$cpuser       = 'CPUS3R';   //str_replace("/", "", $tmpstring2);
+$cpuser       = 'CPUS3R';   //$cpuser    =  $sepdirhome[2];$pubhtml   =  $sepdirhome[3];
 
 $defemailPRE  = 'support@plrjack.com'; $defemail2PRE = '&#066;&#117;&#115;&#105;&#110;&#101;&#115;&#115;&#064;&#068;&#105;&#103;&#105;&#116;&#097;&#108;&#067;&#114;&#097;&#122;&#121;&#046;&#098;&#105;&#122;';
 $defemail     = 'DEF3ML';
@@ -26,25 +29,25 @@ $dldstickPRE  = 'https://d0wnload.digitalcrazy.biz/niches';
 $dldstick     = 'DLDST1K';
 
 $htadoomainPRE= 'plrjack\.com';
-$htadoomain   = 'HTACPHoST'; //str_replace(".", "\.", $_SERVER['HTTP_HOST']);
+$htadoomain   = 'HTACPHoST';
 
 $doomainPRE   = 'plrjack.com'; $doomain2PRE  = 'Plrjack.com'; $doomain3PRE  = 'PLRJack.com'; $doomain4PRE  = 'W3BTITLE.com';
-$doomain      = 'CPH0ST'; //$_SERVER['HTTP_HOST'];
+$doomain      = 'CPH0ST'; 
 
 $webtitlePRE  = 'PLR Jack';    $webtitle2PRE = 'PLRJack'; $webtitle3PRE = 'PLR&nbsp;Jack'; $webtitle4PRE = 'PLRJACK';   
-$webtitle     = 'W3BTITLE'; //$_GET['wbt'];
+$webtitle     = 'W3BTITLE';
 
 $webphonePRE  = '&#043;&#052;&#052;&#040;&#048;&#041;&#055;&#055;&#050;&#050;&#048;&#057;&#049;&#050;&#051;&#055;';
 $webphone     = 'W3BPH0NE';
 
 $cppazzPRE    = 'Ll3QqYN!y0U*2$m';
-$cppazz       = 'CPP455';   //$_GET['cpk'];
+$cppazz       = 'CPP455';
 
 $dbpazzPRE    = 'Ll3QqYN!y0U*2$m'; 
-$dbpazz       = 'DBP455';   //$_GET['dpz'];
+$dbpazz       = 'DBP455';
 
 $dbsufxPRE    = '_dc1911j';
-$dbsufx       = '_DBSUFX';  //$_GET['dbu'];
+$dbsufx       = '_DBSUFX';
 
 $doomsslPRE   = 'https://CPH0ST';
 $doomssl      = 'https://CPH0ST'; 
@@ -57,7 +60,8 @@ $files_not_updated = 0;
 $msgrepl = '';
 
 $replace = array(
-$dirhomePRE   => $dirhome,
+$dirhomef1PRE => $dirhomef1,
+$dirhomef2PRE => $dirhomef2,
 $cpuserPRE    => $cpuser, 
 $defemailPRE  => $defemail, $defemail2PRE => $defemail,
 $dldstickPRE  => $dldstick,
@@ -121,12 +125,13 @@ function dir_replace ($dirname, $recursive = RECURSE) {
 
 function file_replace ($filename) {
   global $files_processed, $files_updated, $files_not_updated, $msgrepl, $replace;
-  global $dirhomePRE, $cpuserPRE, $defemailPRE, $dldstickPRE, $htadoomainPRE, $doomainPRE, $webtitlePRE, $webphonePRE, $cppazzPRE, $dbpazzPRE, $dbsufxPRE, $doomsslPRE; 
+  global $dirhomef1PRE, $dirhomef2PRE, $cpuserPRE, $defemailPRE, $dldstickPRE, $htadoomainPRE, $doomainPRE, $webtitlePRE, $webphonePRE, $cppazzPRE, $dbpazzPRE, $dbsufxPRE, $doomsslPRE; 
   global $defemail2PRE, $doomain2PRE, $doomain3PRE, $doomain4PRE, $webtitle2PRE, $webtitle3PRE, $webtitle4PRE; 
   $files_processed++; 
 
   $txt = file_get_contents($filename);    // get file contents
-  $update = (strpos($txt,$dirhomePRE)  !== FALSE) ||
+  $update = (strpos($txt,$dirhomef1PRE)!== FALSE) ||
+			(strpos($txt,$dirhomef2PRE)!== FALSE) ||
 			(strpos($txt,$cpuserPRE)   !== FALSE) ||
 			(strpos($txt,$defemailPRE) !== FALSE) ||
 			(strpos($txt,$defemail2PRE)!== FALSE) ||

@@ -1,6 +1,6 @@
 <?php
 ###############################################################
-# Recursive Text Replacer 2.02
+# Recursive Text Replacer 2.03(MMTW)
 ###############################################################
 # Visit http://www.zubrag.com/scripts/ for updates
 ############################################################### 
@@ -10,13 +10,19 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 // Init Vars
 $startpath    = $_SERVER['DOCUMENT_ROOT'];
-$sepdirhome   = explode("/", $_SERVER['DOCUMENT_ROOT']);
-$dirhomePRE   = 'HOM3D1R'; 
-$dirhome      = strtolower($sepdirhome[1]);
-$tmpstring1   = str_replace($dirhome."/", "", $_SERVER['DOCUMENT_ROOT']);
-$tmpstring2   = str_replace("/public_html", "", $tmpstring1);
+$sepdirhome   = explode("/", strtolower($_SERVER['DOCUMENT_ROOT']));
+
+$dirhomef1PRE = '/HOM3D1R/CPUS3R';
+$dirhomef1    = '/'.$sepdirhome[1].'/'.$sepdirhome[2];
+$dirhomef2PRE = '/HOM3D1R\\/CPUS3R'; 
+$dirhomef2    = '/'.$sepdirhome[1].'\\/'.$sepdirhome[2];
+//$dirhomePRE   = 'HOM3D1R'; 
+//$dirhome      = strtolower($sepdirhome[1]);
+//$tmpstring1   = str_replace($dirhome."/", "", $_SERVER['DOCUMENT_ROOT']);
+//$tmpstring2   = str_replace("/public_html", "", $tmpstring1); //$pubhtml   =  $sepdirhome[3];
 $cpuserPRE    = 'CPUS3R';  
-$cpuser       = str_replace("/", "", $tmpstring2);
+//$cpuser       = str_replace("/", "", $tmpstring2);
+$cpuser       =  $sepdirhome[2];
 $defemailPRE  = 'DEF3ML';
 $defemail     = $cpuser.'@'.$_SERVER['HTTP_HOST'];
 $dldstickPRE  = 'DLDST1K';
@@ -51,7 +57,8 @@ $files_not_updated = 0;
 $msgrepl = '';
 
 $replace = array(
-$dirhomePRE   => $dirhome,
+$dirhomef1PRE => $dirhomef1,
+$dirhomef2PRE => $dirhomef2,
 $cpuserPRE    => $cpuser, 
 $defemailPRE  => $defemail,
 $dldstickPRE  => $dldstick,
@@ -116,17 +123,18 @@ function dir_replace ($dirname, $recursive = RECURSE) {
 
 function file_replace ($filename) {
   global $files_processed, $files_updated, $files_not_updated, $msgrepl, $replace;
-  global $dirhomePRE, $cpuserPRE, $defemailPRE, $dldstickPRE, $htadoomainPRE, $doomainPRE, $webtitlePRE, $webphonePRE, $cppazzPRE, $dbpazzPRE, $dbsufxPRE;
+  global $dirhomef1PRE, $dirhomef2PRE, $cpuserPRE, $defemailPRE, $dldstickPRE, $htadoomainPRE, $doomainPRE, $webtitlePRE, $webphonePRE, $cppazzPRE, $dbpazzPRE, $dbsufxPRE;
   $files_processed++;
 
   $txt = file_get_contents($filename);    // get file contents
-  $update = (strpos($txt,$dirhomePRE)  !== FALSE) ||
-			(strpos($txt,$cpuserPRE)   !== FALSE) ||
-			(strpos($txt,$defemailPRE) !== FALSE) ||
-    		(strpos($txt,$dldstickPRE) !== FALSE) || 
-  			(strpos($txt,$htadoomainPRE)!==FALSE) ||
-			(strpos($txt,$doomainPRE)  !== FALSE) ||
-  			(strpos($txt,$webtitlePRE) !== FALSE) ||
+  $update = (strpos($txt,$dirhomef1PRE)!== FALSE) || 
+			(strpos($txt,$dirhomef2PRE)!== FALSE) || 
+			(strpos($txt,$cpuserPRE)   !== FALSE) || 
+			(strpos($txt,$defemailPRE) !== FALSE) || 
+			(strpos($txt,$dldstickPRE) !== FALSE) || 
+			(strpos($txt,$htadoomainPRE)!==FALSE) || 
+			(strpos($txt,$doomainPRE)  !== FALSE) || 
+			(strpos($txt,$webtitlePRE) !== FALSE) || 
 			(strpos($txt,$webphonePRE) !== FALSE) || 
 			(strpos($txt,$cppazzPRE)   !== FALSE) || 
 			(strpos($txt,$dbpazzPRE)   !== FALSE) || 

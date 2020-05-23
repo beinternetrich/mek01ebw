@@ -1,102 +1,29 @@
-<?php 
-//===================================================== 
-//I want to see all errors
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-$flog = fopen("flog.log","a");
-$flogt= "<br>Log Install01 Echos<br>";
-###############################################################
-# MMTECHWORKS WEBSITE BUILDER - MMTW.V8.20200521.2300
-###############################################################
-# Visit DigitalCrazy.biz
-###############################################################
-//$skel = "https://mmtw.s3.eu-west-2.amazonaws.com/dcrazy/mek01ebw/";
-$skel   = "https://digitalcrazy.biz/mek01ebw/";
-//$fsql   = 'db02.sql';
-$rowsets= array(
-    array("dlodfilnum","srcfile","copyto",   "unzipto"),
-    array("nfile01",  "N1in.zip", "/"        , "/"),
-    array("yfile02",  "N2wp.zip", "/", "/../"),
-	array("yfile03",  "N3sh.zip", "/", "/../eShop/"),
-	array("yfile04",  "N4sh.zip", "/", "/../eShop/"),
-	array("yfile05",  "N5sh.zip", "/", "/../eShop/"),
-	array("nfile06",  "N6sh.zip", "/", "/../eShop/")); 
-###############################################################
-$doomain   =  $_SERVER['HTTP_HOST'];  
-$doomaintag= "Tap Into The Secret Goldmine of PLR!";
-
-$sepdomain =  explode(".", $doomain);
-$webtitle  =  substr_replace($sepdomain[0], substr($sepdomain[0], 0, 1), 0, 1);
-$webtitle  =  getVar('wbt', $webtitle);
-$webtitle  =  str_replace(' ', '+', $webtitle);
-
-$sepdirhome=  explode("/", strtolower($_SERVER['DOCUMENT_ROOT']));
-$dirhome   =  $sepdirhome[1];
-$cpuser    =  $sepdirhome[2];
-$pubhtml   =  $sepdirhome[3];
-$cpuser    =  getVar('cpu', $cpuser);
-$cppazz    =  getVar('cpk', '');
-
-$proceed   =  false;
-$dbsffx    =  strtolower(substr("00".date("his"),-8,7));
-$dbpazz    =  'Ll3QrYm!y0U*2M$'; //'Ll3QqYN!y0U*2$$m';  'P!55w0D4ec4LdBb';
-$cppazzok=false;
-//echo fprintf($flog,"\n%s","Stop1".$flogt);
-###############################################################
-# END OF SETTINGS
-###############################################################
-function getVar($name, $def = '') {
-	if (isset($_REQUEST[$name])) return $_REQUEST[$name]; 
-	else return $def;}
-
-//:::::::::::::::::::==DOWNLOAD and EXPAND==::::::::::::::::::::
-//:::::::::::::::::::==DOWNLOAD and EXPAND==::::::::::::::::::::
-if(!empty($cppazz)) $cppazzok=true;
-while ($cppazzok) {
-	$i=0;
-	$res=false;
+<?php require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
+//========================================================================= 
+//:::::::::::::::::::::::::::SHOW FORM & DOWNLOAD::::::::::::::::::::::::::
+if(!empty($cppazz)) $proceed = true; else $flogt .="\r\nAborting downloads!";
+while ($proceed) {
+	$i=0;  $res=false;
 	foreach($rowsets as $rowset) { 
-	echo fprintf($flog,"\n%s","Stop2");
-		$i++;
-		if($i <= 1) continue; // Skip one iteration else continue..
-		$flogt="";
-			$dlodsrc  = substr($rowset[0], 0, 1) === 'y'? true: false;
-			$srcfile  = $rowset[1];
-			$instpath = dirname(__FILE__).$rowset[2]; //$pathpath = getcwd()
-			$destpath = dirname(__FILE__).$rowset[3];
-			if(!empty($srcfile) && $dlodsrc) {
-				if(!copy($skel.$srcfile, $instpath.$srcfile)) $flogt .="<br>Error copying $skel$srcfile to $instpath$srcfile";
-				if(!file_exists($instpath.$srcfile)) {
-					$flogt .="<br>Error getting $skel$srcfile from local";
-				} else { 
-					$zip = new ZipArchive;
-					$res = $zip->open($instpath.$srcfile);  ///REMREMREM
-					if ($res === TRUE) {
-						$proceed = true;
-						$zip->extractTo($destpath); 
-						$zip->close();
-						$flogt .="<br>WOOT! $instpath$srcfile extracted to $destpath"; 
-					} else { 
-						$flogt .="<br>Did not extract $instpath$srcfile to $destpath";
-					}
-				}
-			} else {
-				$flogt .="<br>Skipping $srcfile. Next!!";
-			}
+	$flogt .= "\r\nDownloading $rowset[1]";  
+	if($i <= 1) continue; // Skip one iteration else continue..
+		$dlodsrc  = substr($rowset[0], 0, 1) === 'y'? true: false;
+		$srcfile  = $rowset[1];
+		$instpath = dirname(__FILE__).$rowset[2]; //$pathpath = getcwd()
+		$destpath = dirname(__FILE__).$rowset[3];
+		if(!empty($srcfile) && $dlodsrc) {
+			if(!copy($skel.$srcfile, $instpath.$srcfile)) 
+			$flogt .="\r\nError copying $skel$srcfile to $instpath$srcfile";
+		} else {
+			$flogt .="\r\nSkipping $srcfile. Next!!";
+		}
+	$i++;
 	} //endforeach
-	echo fprintf($flog,"\n%s",$flogt);
-	
-//::::::::::SAFE COPY IndexPHP, Db, HTAccess, WPConfig, PincSet::::::::::::
-//::::::::::SAFE COPY IndexPHP, Db, HTAccess, WPConfig, PincSet::::::::::::
-	$sdr       = $_SERVER['DOCUMENT_ROOT'];
-	copy($sdr .'/install/indx2root.php',   $sdr.'/install/PREindex.php');
-	copy($sdr .'/install/.htaccss2root.txt',$sdr.'/install/.PREhtaccess');
-	copy($sdr .'/install/tplwpc0nfig.php', $sdr.'/install/PREwp-config.php');
-	copy($sdr .'/install/tplpinc2et.php',  $sdr.'/install/PREmmtw-pincset.php');
-	copy($sdr .'/install/freshdb02.sql',   $sdr.'/install/PREdb.sql');
-	$cppazzok=false;
-//	exit;
+$flogt .= "\r\nInstall01 Files Downloaded.";
+echo "$flogt";
+echo fprintf($flog,"\r\n%s","A1".$flogt);
+$proceed = false;
+exit;
 } // endwhile
 ?>
 <?php if (true) { ?>
@@ -178,10 +105,7 @@ body {font-family: Arial,sans-serif; font-size:1.0em;}
 <tbody>
 
 <tr><td colspan="2">
-<?php } 
-//echo fprintf($flog,"\n%s","Stop6");
-//echo "<br>No: $dbsffx";
-?>
+<?php } ?>
 </td></tr>
 
 <tr>

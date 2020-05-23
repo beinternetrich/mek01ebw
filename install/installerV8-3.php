@@ -1,5 +1,5 @@
-<?php require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php';
-//===================================================================
+<?php require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
+//MMTECHWORKS WEBSCRIPT - MMTW.V8.20200522.2100
 //::::::::SAFE COPY IndexPHP, Db, HTAccess, WPConfig, PincSet::::::::
 	$sdr       = $_SERVER['DOCUMENT_ROOT'];
 	copy($sdr .'/install/indx2root.php',   $sdr.'/install/PREindex.php');

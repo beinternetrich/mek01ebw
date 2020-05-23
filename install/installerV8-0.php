@@ -1,15 +1,16 @@
 <?php 
 //===================================================== 
+###############################################################
+# MMTECHWORKS WEBSITE BUILDER - MMTW.V8.20200522.2100
+###############################################################
+# Visit DigitalCrazy.biz
+###############################################################
 //I want to see all errors
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $flog = fopen("flog.log","a");
 $flogt= "\r\nLog Installer Echos";
-###############################################################
-# MMTECHWORKS WEBSITE BUILDER - MMTW.V8.20200522.2100
-###############################################################
-# Visit DigitalCrazy.biz
 ###############################################################
 //$skel = "https://mmtw.s3.eu-west-2.amazonaws.com/dcrazy/mek01ebw/";
 $skel   = "https://digitalcrazy.biz/mek01ebw/";

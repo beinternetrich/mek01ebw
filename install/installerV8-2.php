@@ -38,6 +38,7 @@ if(empty($cppazz)) {
 			}//iteration skipped.
 		$i++;
 		} //endforeach
+	if(!unlink($file_pointer)) echo $flogt .="\r\nCould not shift HTA";
 	$proceed = false;
 	echo $flogt .= "\r\nProceedure end: Expands should be completed.";
 	//echo "$flogt";
@@ -51,8 +52,8 @@ if(empty($cppazz)) {
 	if(!file_exists($sdr.'/wp-config.php')) {
 		echo $flogt .="\r\n$sdr"."/wp-config.php Not Present....";
 	} else {
-	$proceed = true; 
-	while ($proceed) {
+//	$proceed = true; 
+//	while ($proceed) {
 //	if ($proceed) {
 		echo $flogt .= "\r\nStarting Data Search and Set...............";
 		//::::::::SAFE COPY IndexPHP, Db, HTAccess, WPConfig, PincSet::::::::
@@ -89,12 +90,12 @@ if(empty($cppazz)) {
 //	} else { 
 //		$flogt .= "\r\nSearchReplace and DbCreate did not start.";
 //	}
-		$proceed = false;
+	//	$proceed = false;
 		echo $flogt .= "\r\nProceedure end - (Data:$dbsffx)";
 		echo fprintf($flog,"\r\n%s",$flogt);
 		//$proceed = false;
-		exit;
-	}// endwhile
+	//	exit;
+//	}// endwhile
 	}//end ifconfigpressent
 } //end Absent Key
 ?>

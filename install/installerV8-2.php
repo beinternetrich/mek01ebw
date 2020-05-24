@@ -1,13 +1,13 @@
 <?php require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
 //MMTECHWORKS WEBSCRIPT - MMTW.V8.20200524.1111
 //:::::::::::::::::::::::::::EXPAND, SR, CREA::::::::::::::::::::::::::
+echo $flogt .= "\r\nExpand, Search, Replace, Create Db Process.";
 echo $flogt .= "\r\nCPK > $cppazz \r\nSDR > $sdr";
-echo fprintf($flog,"\r\n%s",$flogt);
 //---------------------------------------------------------------------
 if(empty($cppazz)) {
 	echo $flogt .= "\r\nKey failure. Aborting Expand & Dataset!";
 } else {
-	echo $flogt .= "\r\nKey present. Continue While/foreach!";
+	echo $flogt .= "\r\nKey present. Continue Foreach Dlod!";
 	$proceed = true; 
 //	$proceed = false; //DO.NOT.RUN DOWNLOAD/EXPAND
 	while ($proceed) {
@@ -41,8 +41,8 @@ if(empty($cppazz)) {
 	$proceed = false;
 	echo $flogt .= "\r\nProceedure end: Expands should be completed.";
 	//echo "$flogt";
-	echo fprintf($flog,"\r\n%s",$flogt);
-	exit;
+//	echo fprintf($flog,"\r\n%s",$flogt);
+//	exit;
 	} // endwhile
 //	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,7 +54,7 @@ if(empty($cppazz)) {
 	$proceed = true; 
 	while ($proceed) {
 //	if ($proceed) {
-		echo $flogt .= "\r\nStarting S&R&Db...............";
+		echo $flogt .= "\r\nStarting Data Search and Set...............";
 		//::::::::SAFE COPY IndexPHP, Db, HTAccess, WPConfig, PincSet::::::::
 			copy($sdr .'/install/indx2root.php',   $sdr.'/install/PREindex.php');
 			copy($sdr .'/install/.htaccss2root.txt',$sdr.'/install/.PREhtaccess');

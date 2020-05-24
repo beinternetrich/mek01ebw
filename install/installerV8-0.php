@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 ini_set('max_execution_time', 300); //temp max execution 5 mins
 set_time_limit(300);
 $flog = fopen("flog.log","a");
-$flogt= "\r\nInstaller Log";
+$flogt= "\r\nInstaller Log~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 ###############################################################
 //$skel = "https://mmtw.s3.eu-west-2.amazonaws.com/dcrazy/mek01ebw/";
 $skel   = "https://digitalcrazy.biz/mek01ebw/";
@@ -40,10 +40,6 @@ $cpuser    =  $sepdirhome[2];
 $pubhtml   =  $sepdirhome[3];
 $cpuser    =  getVar('cpu', $cpuser);
 $cppazz    =  getVar('cpk', '');
-
-$flogt .= "\r\nCPK > $cppazz \r\nSDR > $sdr";
-echo "$flogt";
-echo fprintf($flog,"\r\n%s",$flogt);
 
 $dbsffx    =  strtolower(substr("00".date("his"),-8,7));
 $dbpazz    =  'Ll3QrYm!y0U*2M$'; //'Ll3QqYN!y0U*2$$m';  'P!55w0D4ec4LdBb';

@@ -41,9 +41,9 @@ $pubhtml   =  $sepdirhome[3];
 $cpuser    =  getVar('cpu', $cpuser);
 $cppazz    =  getVar('cpk', '');
 
-$flogt .= "\r\nCPK > $cppazz";
+$flogt .= "\r\nCPK > $cppazz \r\nSDR > $sdr";
 echo "$flogt";
-echo fprintf($flog,"\r\n%s","1-".$flogt);
+echo fprintf($flog,"\r\n%s",$flogt);
 
 $dbsffx    =  strtolower(substr("00".date("his"),-8,7));
 $dbpazz    =  'Ll3QrYm!y0U*2M$'; //'Ll3QqYN!y0U*2$$m';  'P!55w0D4ec4LdBb';

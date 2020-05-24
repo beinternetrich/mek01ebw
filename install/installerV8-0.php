@@ -1,7 +1,6 @@
 <?php 
-//===================================================== 
 ###############################################################
-# MMTECHWORKS WEBSITE BUILDER - MMTW.V8.20200522.2100
+# MMTECHWORKS WEBSITE BUILDER - MMTW.V8.20200524.0000
 ###############################################################
 # Visit DigitalCrazy.biz
 ###############################################################
@@ -10,7 +9,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $flog = fopen("flog.log","a");
-$flogt= "\r\nLog Installer Echos";
+$flogt= "\r\nInstaller Log";
 ###############################################################
 //$skel = "https://mmtw.s3.eu-west-2.amazonaws.com/dcrazy/mek01ebw/";
 $skel   = "https://digitalcrazy.biz/mek01ebw/";
@@ -32,12 +31,17 @@ $webtitle  =  substr_replace($sepdomain[0], substr($sepdomain[0], 0, 1), 0, 1);
 $webtitle  =  getVar('wbt', $webtitle);
 $webtitle  =  str_replace(' ', '+', $webtitle);
 
-$sepdirhome=  explode("/", strtolower($_SERVER['DOCUMENT_ROOT']));
+$sdr       =  $_SERVER['DOCUMENT_ROOT'];
+$sepdirhome=  explode("/", $sdr);
 $dirhome   =  $sepdirhome[1];
 $cpuser    =  $sepdirhome[2];
 $pubhtml   =  $sepdirhome[3];
 $cpuser    =  getVar('cpu', $cpuser);
 $cppazz    =  getVar('cpk', '');
+
+$flogt .= "\r\nCPK > $cppazz";
+echo "$flogt";
+echo fprintf($flog,"\r\n%s","1-".$flogt);
 
 $dbsffx    =  strtolower(substr("00".date("his"),-8,7));
 $dbpazz    =  'Ll3QrYm!y0U*2M$'; //'Ll3QqYN!y0U*2$$m';  'P!55w0D4ec4LdBb';

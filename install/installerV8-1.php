@@ -1,31 +1,32 @@
 <?php require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
-//MMTECHWORKS WEBSCRIPT - MMTW.V8.20200522.2100
+//MMTECHWORKS WEBSCRIPT - MMTW.V8.20200524.0001
 //:::::::::::::::::::::::::::SHOW FORM & DOWNLOAD::::::::::::::::::::::::::
-if(!empty($cppazz)) $proceed = true; else $flogt .="\r\nAborting downloads!";
-while ($proceed) {
+if(!empty($cppazz)) $proceed = true; else $flogt .="\r\nKey failure. Aborting all downloads!";
+	while ($proceed) {
 	$i=0;  $res=false;
-	foreach($rowsets as $rowset) { 
-	$flogt .= "\r\nDownloading $rowset[1]";  
-	if ($i <= 1) {} else { // Skip one iteration else continue..
-		$dlodsrc  = substr($rowset[0], 0, 1) === 'y'? true: false;
-		$srcfile  = $rowset[1];
-		$instpath = dirname(__FILE__).$rowset[2]; //$pathpath = getcwd()
-		$destpath = dirname(__FILE__).$rowset[3];
-		if(!empty($srcfile) && $dlodsrc) {
-			if(!copy($skel.$srcfile, $instpath.$srcfile)) 
-			$flogt .="\r\nError copying $skel$srcfile to $instpath$srcfile";
-		} else {
-			$flogt .="\r\nSkipping $srcfile. Next!!";
-		}
-	}
-	$i++;
-	} //endforeach
-$flogt .= "\r\nInstall01 Files Downloaded.";
-echo "$flogt";
-echo fprintf($flog,"\r\n%s","A1".$flogt);
-$proceed = false;
-exit;
-} // endwhile
+		foreach($rowsets as $rowset) { 
+			$srcfile  = $rowset[1];
+			$instpath = dirname(__FILE__).$rowset[2]; //$pathpath = getcwd()
+			$destpath = dirname(__FILE__).$rowset[3];
+			$flogt .= "\r\nFor $srcfile";  
+			if ($i <= 1) { } else {
+				$dlodsrc  = substr($rowset[0], 0, 1) === 'y'? true: false;
+				if(!empty($srcfile) && $dlodsrc) {
+					if(!copy($skel.$srcfile, $instpath.$srcfile)) 
+					$flogt .="\r\nError copying $srcfile to $instpath$srcfile";
+					else $flogt .="\r\nWorkable - $instpath$srcfile";
+				} else {
+					$flogt .="\r\nSkipping $srcfile. Next!!";
+				}
+			}//iteration skipped.
+		$i++;
+		} //endforeach
+	$flogt .= "\r\nProceedure ends. ";
+	echo "$flogt";
+	echo fprintf($flog,"\r\n%s",$flogt);
+	$proceed = false;
+	exit;
+	} // endwhile
 ?>
 <?php if (true) { ?>
 <html>

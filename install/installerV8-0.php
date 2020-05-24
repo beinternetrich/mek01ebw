@@ -1,6 +1,6 @@
 <?php 
 ###############################################################
-# MMTECHWORKS WEBSITE BUILDER - MMTW.V8.20200524.0000
+# MMTECHWORKS WEBSITE BUILDER - MMTW.V8.20200524.0030
 ###############################################################
 # Visit DigitalCrazy.biz
 ###############################################################
@@ -8,6 +8,8 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+ini_set('max_execution_time', 300); //temp max execution 5 mins
+set_time_limit(300);
 $flog = fopen("flog.log","a");
 $flogt= "\r\nInstaller Log";
 ###############################################################

@@ -90,8 +90,7 @@ if(empty($cppazz)) {
 //		$flogt .= "\r\nSearchReplace and DbCreate did not start.";
 //	}
 		$proceed = false;
-		echo $flogt .= "\r\nProceedure end - SRC";
-		//echo "$flogt";
+		echo $flogt .= "\r\nProceedure end - (Data:$dbsffx)";
 		echo fprintf($flog,"\r\n%s",$flogt);
 		//$proceed = false;
 		exit;

@@ -1,6 +1,6 @@
  <?php
 ###############################################################
-# Recursive Text Replacer 2.03(MMTW)
+# Recursive Text Replacer 2.04(MMTW)
 ###############################################################
 # Visit http://www.zubrag.com/scripts/ for updates
 ############################################################### 
@@ -20,14 +20,12 @@ $dirhomef1PRE = '/home/plrjatkj';
 $dirhomef1    = '/HOM3D1R/CPUS3R';   //strtolower($sepdirhome[0]);
 $dirhomef2PRE = '/home\\/plrjatkj';
 $dirhomef2    = '/HOM3D1R\\/CPUS3R';   //strtolower($sepdirhome[0]);
-//$tmpstring1   = str_replace($dirhome."/", "", $_SERVER['DOCUMENT_ROOT']);
-//$tmpstring2   = str_replace("/public_html", "", $tmpstring1);
+
+$defemailPRE  = 'support@plrjack.com'; $defemail2PRE='plrjatkj@plrjack.com'; $defemail3PRE = '&#066;&#117;&#115;&#105;&#110;&#101;&#115;&#115;&#064;&#068;&#105;&#103;&#105;&#116;&#097;&#108;&#067;&#114;&#097;&#122;&#121;&#046;&#098;&#105;&#122;';
+$defemail     = 'DEF3ML';
 
 $cpuserPRE    = 'plrjatkj'; 
 $cpuser       = 'CPUS3R';   //$cpuser    =  $sepdirhome[2];$pubhtml   =  $sepdirhome[3];
-
-$defemailPRE  = 'support@plrjack.com'; $defemail2PRE = '&#066;&#117;&#115;&#105;&#110;&#101;&#115;&#115;&#064;&#068;&#105;&#103;&#105;&#116;&#097;&#108;&#067;&#114;&#097;&#122;&#121;&#046;&#098;&#105;&#122;';
-$defemail     = 'DEF3ML';
 
 $dldstickPRE  = 'https://d0wnload.digitalcrazy.biz/niches';
 $dldstick     = 'DLDST1K';
@@ -67,7 +65,7 @@ $replace = array(
 $dirhomef1PRE => $dirhomef1,
 $dirhomef2PRE => $dirhomef2,
 $cpuserPRE    => $cpuser, 
-$defemailPRE  => $defemail, $defemail2PRE => $defemail,
+$defemailPRE  => $defemail, $defemail2PRE => $defemail, $defemail3PRE => $defemail,
 $dldstickPRE  => $dldstick,
 $htadoomainPRE=> $htadoomain,
 $doomainPRE   => $doomain,  $doomain2PRE  => $doomain,  $doomain3PRE  => $doomain,  $doomain4PRE  => $doomain,
@@ -131,7 +129,7 @@ function dir_replace ($dirname, $recursive = RECURSE) {
 function file_replace ($filename) {
   global $files_processed, $files_updated, $files_not_updated, $msgrepl, $replace;
   global $dirhomef1PRE, $dirhomef2PRE, $cpuserPRE, $defemailPRE, $dldstickPRE, $htadoomainPRE, $doomainPRE, $webtitlePRE, $webphonePRE, $cppazzPRE, $dbpazzPRE, $dbsufxPRE, $doomsslPRE; 
-  global $defemail2PRE, $doomain2PRE, $doomain3PRE, $doomain4PRE, $webtitle2PRE, $webtitle3PRE, $webtitle4PRE; 
+  global $defemail2PRE, $defemail3PRE, $doomain2PRE, $doomain3PRE, $doomain4PRE, $webtitle2PRE, $webtitle3PRE, $webtitle4PRE; 
   $files_processed++; 
 
   $txt = file_get_contents($filename);    // get file contents
@@ -140,6 +138,7 @@ function file_replace ($filename) {
 			(strpos($txt,$cpuserPRE)   !== FALSE) ||
 			(strpos($txt,$defemailPRE) !== FALSE) ||
 			(strpos($txt,$defemail2PRE)!== FALSE) ||
+			(strpos($txt,$defemail3PRE)!== FALSE) ||
 			(strpos($txt,$dldstickPRE) !== FALSE) ||
 			(strpos($txt,$htadoomainPRE)!==FALSE) ||
 			(strpos($txt,$doomainPRE)  !== FALSE) ||

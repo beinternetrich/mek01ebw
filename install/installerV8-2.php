@@ -93,12 +93,18 @@ if(empty($cppazz)) {
 			$f = file_get_contents($s);
 			@fclose($f);
 			$flogt .="\r\nDbcreation should be completed.....";
+
+		//::::::::Setup BizEmail Forwarding::::::::::::::::::::::::::::::::::
+			$s ="http://$doomain/install/cpbzemailcreateV3.php?cpu=$cpuser&cpk=$cppazz&fwd=$fwdemail";
+			$f = file_get_contents($s);
+			@fclose($f);
+			$flogt .="\r\nBizEmail Forwarding should be completed.....";
 //	} else { 
 //		$flogt .= "\r\nSearchReplace and DbCreate did not start.";
 //	}
 	//	exit;
 //	}// endwhile
-	}//end ifconfigpressent
+	}//end ifconfigpressent//////cpbzemailcreate.php?cpk={$cppazz}&fwd={$fwdemail}"
 } //end Absent Key
 echo $flogt .= "\r\nProceedure end - (Data:$dbsffx)";
 echo fprintf($flog,"\r\n%s",$flogt);

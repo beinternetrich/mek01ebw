@@ -1,6 +1,6 @@
 <?php
 ###############################################################
-# Recursive Text Replacer 2.03(MMTW)
+# Recursive Text Replacer 2.04(MMTW)
 ###############################################################
 # Visit http://www.zubrag.com/scripts/ for updates
 ############################################################### 
@@ -20,15 +20,11 @@ $dirhomef1PRE = '/HOM3D1R/CPUS3R';
 $dirhomef1    = '/'.$sepdirhome[1].'/'.$sepdirhome[2];
 $dirhomef2PRE = '/HOM3D1R\\/CPUS3R'; 
 $dirhomef2    = '/'.$sepdirhome[1].'\\/'.$sepdirhome[2];
-//$dirhomePRE   = 'HOM3D1R'; 
-//$dirhome      = strtolower($sepdirhome[1]);
-//$tmpstring1   = str_replace($dirhome."/", "", $_SERVER['DOCUMENT_ROOT']);
-//$tmpstring2   = str_replace("/public_html", "", $tmpstring1); //$pubhtml   =  $sepdirhome[3];
-$cpuserPRE    = 'CPUS3R';  
-//$cpuser       = str_replace("/", "", $tmpstring2);
-$cpuser       =  $sepdirhome[2];
+
 $defemailPRE  = 'DEF3ML';
-$defemail     = $cpuser.'@'.$_SERVER['HTTP_HOST'];
+$defemail     = 'support@'.$_SERVER['HTTP_HOST'];
+$cpuserPRE    = 'CPUS3R';  
+$cpuser       =  $sepdirhome[2];
 $dldstickPRE  = 'DLDST1K';
 $dldstick     = 'https://d0wnload.digitalcrazy.biz/niches';
 $htadoomainPRE= 'HTACPHoST'; 
@@ -47,12 +43,6 @@ $dbsufxPRE    = '_DBSUFX';
 $dbsufx       = '_'.$_GET['dbx'];
 //$doomsslPRE   = 'http://CPH0ST';
 //$doomssl      = 'http?://CPH0ST'; 
-//--------------------------------------------
-
-//echo "<br/>Checks::IN::POST::SR:::::::::::::::::::::::::::::::::::::::::::::::::::::::<br/>";
-//echo "<br>cpz="   .$cppazz;
-//echo "<br>dpz="   .$dbpazz;
-//echo "<br>dbx="   .$dbsufx."<br/>";
 //--------------------------------------------
 $stime = time();
 $files_processed = 0;

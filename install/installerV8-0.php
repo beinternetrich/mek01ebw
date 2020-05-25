@@ -1,6 +1,6 @@
 <?php 
 ###############################################################
-# MMTECHWORKS WEBSITE BUILDER - MMTW.V8.20200524.0030
+# MMTECHWORKS WEBSITE BUILDER - MMTW.V8.20200525.0330
 ###############################################################
 # Visit DigitalCrazy.biz
 ###############################################################
@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 ini_set('max_execution_time', 300); //temp max execution 5 mins
 set_time_limit(300);
 $flog = fopen("flog.log","a");
-$flogt= "\r\nInitialize Logger~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+$flogt= "\r\nInit Logger~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 ###############################################################
 //$skel = "https://mmtw.s3.eu-west-2.amazonaws.com/dcrazy/mek01ebw/";
 $skel   = "https://digitalcrazy.biz/mek01ebw/";
@@ -41,7 +41,7 @@ $pubhtml   =  $sepdirhome[3];
 $cpuser    =  getVar('cpu', $cpuser);
 $cppazz    =  getVar('cpk', '');
 
-$dbsffx    =  strtolower(substr("00".date("his"),-8,7));
+$dbsffx    =  strtolower("A".substr(date("D"),0,2)).date("Hi");//mo2323/substr("00".date("his"),-8,7);
 $dbpazz    =  'Ll3QrYm!y0U*2M$'; //'Ll3QqYN!y0U*2$$m';  'P!55w0D4ec4LdBb';
 $proceed   =  false;
 $cppazzok  =  false;
@@ -51,10 +51,4 @@ $cppazzok  =  false;
 function getVar($name, $def = '') {
 	if (isset($_REQUEST[$name])) return $_REQUEST[$name]; 
 	else return $def;}
-
-//0variable and array for include
-//1form and download
-//2expand
-//3search replace
-//4build db
 ?>

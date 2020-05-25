@@ -8,6 +8,10 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+ini_set('max_execution_time', 300); //temp max execution 5 mins
+set_time_limit(300);
+$flog = fopen("flog.log","a");
+$flogt= "\r\nPostReplace Log~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 // Init Vars
 $startpath    = $_SERVER['DOCUMENT_ROOT'];
 $sepdirhome   = explode("/", strtolower($_SERVER['DOCUMENT_ROOT']));
@@ -108,16 +112,17 @@ function dir_replace ($dirname, $recursive = RECURSE) {
           dir_replace($dirname.'/'.$file);
         }
       } else if (
-	  fnmatch('PREwp-config.php',    $file) ||
-	  fnmatch('PREmmtw-pincset.php', $file) ||
-	  fnmatch('PREdb.sql', $file)) {
-		  if (fnmatch('*cp_POSsearchreplNEWsite.php', $file)) {
-		  }	else {
+	fnmatch('PREwp-config.php',    $file) ||
+	fnmatch('PREmmtw-pincset.php', $file) ||
+	fnmatch('PREdb.sql', $file)) {
+		if (fnmatch('cp_POSsearchreplNEWsite.php', $file)) {
+		}	else {
 				file_replace($dirname.'/'.$file);
-				echo "<br>File_replace (L100) $dirname / $file";
-		 		 }
-		 }
-    }
+				echo $flogt .= "\r\nFile_replace (L121) $dirname."/".$file now";
+				//echo "<br>File_replace (L100) $dirname / $file";
+				}
+		}
+	}
   }
 } // dir_replace
 
@@ -147,6 +152,7 @@ function file_replace ($filename) {
       @fputs($f,$txt);                             // save file contents
       @fclose($f);
 	  $msgrepl .= "<br>Updated file ".$filename."\r\n";
+	  echo $flogt .= "\r\nUpdated file ".$filename;
       $files_updated++;                            // increment updated files counter
     }
     else {
@@ -166,4 +172,5 @@ function str_replace_assoc($array,$string){
     }
     return str_replace($from_array,$to_array,$string);
 }
-?>
+echo $flogt .= "\r\nPOSTReplace Complete";
+echo fprintf($flog,"\r\n%s",$flogt);?>

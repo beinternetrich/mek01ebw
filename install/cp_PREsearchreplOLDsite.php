@@ -8,6 +8,10 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+ini_set('max_execution_time', 300); //temp max execution 5 mins
+set_time_limit(300);
+$flog = fopen("flog.log","a");
+$flogt= "\r\nPreSearch Log~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 // Init Vars
 $startpath    = $_SERVER['DOCUMENT_ROOT'];
 $sepdirhome   = explode("/", strtolower($_SERVER['DOCUMENT_ROOT']));
@@ -113,9 +117,10 @@ function dir_replace ($dirname, $recursive = RECURSE) {
 	  fnmatch('PREwp-config.php',    $file) ||
 	  fnmatch('PREmmtw-pincset.php', $file) ||
 	  fnmatch('PREdb.sql', $file)) {
-		  if (fnmatch('*cp_PREsearchreplOLDsite.php', $file)) {
+		  if (fnmatch('cp_PREsearchreplOLDsite.php', $file)) {
 		  }	else {
 				file_replace($dirname.'/'.$file);
+				echo $flogt .= "\r\nFile_replace (L123) $dirname."/".$file now";
 //				echo "<br>File_replace (L113) $dirname $file now";
 	  			}
 		  }
@@ -157,10 +162,11 @@ function file_replace ($filename) {
 	if ($f) {
       @fputs($f,$txt);                             // save file contents
       @fclose($f);
-      $msgrepl .= "<br>Updated file ".$filename."\r\n";
+	  $msgrepl .= "<br>Updated file ".$filename."\r\n";
+	  echo $flogt .= "\r\nUpdated file ".$filename;
+	  
       $files_updated++;                            // increment updated files counter
-    }
-    else {
+    } else {
       $msgrepl .= "<br>Could not update file ".$filename.". Check permissions\r\n";
       $files_not_updated++;
     }
@@ -176,4 +182,6 @@ function str_replace_assoc($array,$string){
     }
     return str_replace($from_array,$to_array,$string);
 }
+echo $flogt .= "\r\nPRESearch Complete";
+echo fprintf($flog,"\r\n%s",$flogt);
 ?>

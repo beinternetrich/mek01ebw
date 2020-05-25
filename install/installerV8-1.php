@@ -8,13 +8,13 @@ if(!empty($cppazz)) $proceed = true; else $flogt .="\r\nKey failure. Aborting al
 			$srcfile  = $rowset[1];
 			$instpath = dirname(__FILE__).$rowset[2]; //$pathpath = getcwd()
 			$destpath = dirname(__FILE__).$rowset[3];
-			echo $flogt .= "\r\nFor $srcfile";  
+			$flogt .= "\r\nFor $srcfile";  
 			if ($i <= 1) { } else {
 				$dlodsrc  = substr($rowset[0], 0, 1) === 'y'? true: false;
 				if(!empty($srcfile) && $dlodsrc) {
 					if(!copy($skel.$srcfile, $instpath.$srcfile)) 
-					echo $flogt .="\r\nError copying $srcfile to $instpath$srcfile";
-					else $flogt .="\r\nWorkable - $instpath$srcfile";
+					$flogt .="\r\nError copying $srcfile to $instpath$srcfile";
+					$flogt .="\r\nWorkable - $instpath$srcfile";
 				} else {
 					$flogt .="\r\nSkipping $srcfile. Next!!";
 				}

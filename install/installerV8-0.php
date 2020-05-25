@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 ini_set('max_execution_time', 300); //temp max execution 5 mins
 set_time_limit(300);
 $flog = fopen("flog.log","a");
-$flogt= "\r\nInstaller Log~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+$flogt= "\r\nInitialize Logger~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 ###############################################################
 //$skel = "https://mmtw.s3.eu-west-2.amazonaws.com/dcrazy/mek01ebw/";
 $skel   = "https://digitalcrazy.biz/mek01ebw/";

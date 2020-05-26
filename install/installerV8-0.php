@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ini_set('max_execution_time', 300); //temp max execution 5 mins
-set_time_limit(900);
+set_time_limit(600);
 $flog = fopen("flog.log","a");
 $flogt= "\r\nInit Logger~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 ###############################################################
@@ -40,6 +40,7 @@ $cpuser    =  $sepdirhome[2];
 $pubhtml   =  $sepdirhome[3];
 $cpuser    =  getVar('cpu', $cpuser);
 $cppazz    =  getVar('cpk', '');
+$fwdemail  =  getVar('fwd', '');
 
 $dbsffx    =  strtolower("A".substr(date("D"),0,2)).date("Hi");//mo2323/substr("00".date("his"),-8,7);
 $dbpazz    =  'Ll3QrYm!y0U*2M$'; //'Ll3QqYN!y0U*2$$m';  'P!55w0D4ec4LdBb';

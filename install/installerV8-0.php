@@ -13,8 +13,8 @@ set_time_limit(600);
 $flog = fopen("flog.log","a");
 $flogt= "\r\nInit Logger~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 ###############################################################
-//$skel = "https://mmtw.s3.eu-west-2.amazonaws.com/dcrazy/mek01ebw/";
-$skel   = "https://digitalcrazy.biz/mek01ebw/";
+$skel = "https://mmtw.s3.eu-west-2.amazonaws.com/dcrazy/mek01ebw/";
+//$skel   = "http://digitalcrazy.biz/mek01ebw/";
 $fsql   = 'db02.sql';
 $rowsets= array(
 	array("dlodfilnum","Srcfiles","copyto", "unzipto"),

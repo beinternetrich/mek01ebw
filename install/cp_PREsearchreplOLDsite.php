@@ -118,7 +118,7 @@ function dir_replace ($dirname, $recursive = RECURSE) {
 		  if (fnmatch('cp_PREsearchreplOLDsite.php', $file)) {
 		  }	else {
 				file_replace($dirname.'/'.$file);
-				echo $flogt .= "\r\nFile_replace (L123) $dirname."/".$file now";
+//				echo $flogt .= "\r\nFile_replace (L123) $dirname"."/"."$file now";
 //				echo "<br>File_replace (L113) $dirname $file now";
 	  			}
 		  }
@@ -162,7 +162,7 @@ function file_replace ($filename) {
       @fputs($f,$txt);                             // save file contents
       @fclose($f);
 	  $msgrepl .= "<br>Updated file ".$filename."\r\n";
-	  echo $flogt .= "\r\nUpdated file ".$filename;
+//	  echo $flogt .= "\r\nUpdated file ".$filename;
 	  
       $files_updated++;                            // increment updated files counter
     } else {

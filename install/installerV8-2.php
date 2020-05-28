@@ -72,10 +72,10 @@ if(empty($cppazz)) {
 			//$flogt .="\r\nRefresh>>>>>>>>>>>>>>>>>>wbt=$webtitle&dbx=$dbsffx&dpz=$dbpazz&cpk=$cppazz";
 
 		//::::::::SEARCH REPLACE and BUILD Database & Webfiles:::::::::::::::
-			$s = "https://$doomain/install/cp_PREsearchreplOLDsite.php";
+			$s = "https://$doomain/install/cp_PREsearchreplOLDsiteV2.php";
 			$f = file_get_contents($s);
 			@fclose($f);
-			$s ="https://$doomain/install/cp_POSsearchreplNEWsite.php?wbt=$webtitle&dbx=$dbsffx&dpz=$dbpazz&cpk=$cppazz";
+			$s ="https://$doomain/install/cp_POSsearchreplNEWsiteV2.php?wbt=$webtitle&dbx=$dbsffx&dpz=$dbpazz&cpk=$cppazz";
 			$f = file_get_contents($s);
 			@fclose($f);
 			$flogt .="\r\nPRE S&R should be completed.....";
@@ -89,13 +89,13 @@ if(empty($cppazz)) {
 			$flogt .="\r\nPRE Destinations should be in place.....";
 
 		//::::::::Setup Database Creation::::::::::::::::::::::::::::::::::::
-			$s ="http://$doomain/install/cpdbcreateV3.php?dbx=$dbsffx&dpz=$dbpazz&cpu=$cpuser&cpk=$cppazz&dbsql=$fsql";
+			$s ="http://$doomain/install/cp_DBcreateV4.php?dbx=$dbsffx&dpz=$dbpazz&cpu=$cpuser&cpk=$cppazz&dbsql=$fsql";
 			$f = file_get_contents($s);
 			@fclose($f);
 			$flogt .="\r\nDbcreation should be completed.....";
 
 		//::::::::Setup BizEmail Forwarding::::::::::::::::::::::::::::::::::
-			$s ="http://$doomain/install/cpbzemailcreateV3.php?cpu=$cpuser&cpk=$cppazz&fwd=$fwdemail";
+			$s ="http://$doomain/install/cp_BZEMLcreateV4.php?cpu=$cpuser&cpk=$cppazz&fwd=$fwdeml";
 			$f = file_get_contents($s);
 			@fclose($f);
 			$flogt .="\r\nBizEmail Forwarding should be completed.....";

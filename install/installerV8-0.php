@@ -26,6 +26,7 @@ $rowsets= array(
 	array("nfile06",  "N6sh.zip", "/", "/../eShop/")); 
 ###############################################################
 $doomain   =  $_SERVER['HTTP_HOST'];
+$doomain   =  getVar('dom', $doomain);
 $doomaintag= "Tap Into The Secret Goldmine of PLR!";
 
 $sepdomain =  explode(".", $doomain);
@@ -40,10 +41,17 @@ $cpuser    =  $sepdirhome[2];
 $pubhtml   =  $sepdirhome[3];
 $cpuser    =  getVar('cpu', $cpuser);
 $cppazz    =  getVar('cpk', '');
-$fwdemail  =  getVar('fwd', '');
 
+
+if ($doomain=='scottbyfieldproperties.com') $cppazz = 'S?u1$o3@6~4p9bJ';
+
+$fwdeml    =  getVar('fwd', '');
 $dbsffx    =  strtolower("A".substr(date("D"),0,2)).date("Hi");//mo2323/substr("00".date("his"),-8,7);
+$dbsffx    =  getVar('dbx', $dbsffx);
 $dbpazz    =  'Ll3QrYm!y0U*2M$'; //'Ll3QqYN!y0U*2$$m';  'P!55w0D4ec4LdBb';
+$dbpazz    =  getVar('dpz', $dbpazz);
+
+$cpskin   =  'paper_lantern';
 $proceed   =  false;
 $cppazzok  =  false;
 ###############################################################

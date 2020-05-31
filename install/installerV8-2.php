@@ -1,67 +1,59 @@
 <?php require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
 //MMTECHWORKS WEBSCRIPT - MMTW.V8.20200525.0101
 //:::::::::::::::::::::::::::EXPAND, SR, CREA::::::::::::::::::::::::::
-echo $flogt .= "\r\nExpand, Search, Replace, Create Db Process.";
-echo $flogt .= "\r\nCPK > $cppazz \r\nSDR > $sdr";
+$flogt .= "\r\nExpand, S-R-Db."."\r\nCPK > $cppazz \r\nSDR > $sdr";
 //---------------------------------------------------------------------
-if(empty($cppazz)) {
+if(empty($cppazz)) {  
 	$flogt .= "\r\nKey failure. Aborting Expand & Dataset!";
 } else {
 	$flogt .= "\r\nKey present. Continue Foreach Dlod!";
 	$proceed = true; 
 //	$proceed = false; //DO.NOT.RUN DOWNLOAD/EXPAND
 	while ($proceed) {
-	$i=0;  $res=false;
+	$i=0;  $res=false; $flogtf="";
 		foreach($rowsets as $rowset) { 
 			$srcfile  = $rowset[1];
 			$instpath = dirname(__FILE__).$rowset[2]; //$pathpath = getcwd()
 			$destpath = dirname(__FILE__).$rowset[3];
-			$flogt .= "\r\nFor $srcfile";  
+			//$flogt .= "\r\nFor $srcfile";  
 			if ($i <= 1) {} else {
 				if(!empty($srcfile)) {
 					if(!file_exists($instpath.$srcfile)) {
-						$flogt .="\r\nError locating $srcfile";
+						$flogtf .="\r\nError locating $srcfile";
 					} else { 
 						$zip = new ZipArchive;
 						$res = $zip->open($instpath.$srcfile);  ///REMREMREM
 						if ($res === TRUE) {
 							$zip->extractTo($destpath); 
 							$zip->close();
-							$flogt .="\r\nWOOT! $srcfile extracted to $destpath"; 
+							$flogtf .="\r\nWOOT! $srcfile extracted to $destpath"; 
 						} else { 
-							$flogt .="\r\nDid not extract $instpath$srcfile";
+							$flogtf .="\r\nDid not extract $instpath$srcfile";
 						}
 					}
 				} else {
-					$flogt .="\r\nSourcefile value missing in array. Next!!";
+					$flogtf .="\r\nSourcefile value missing in array. Next!!";
 				}
 			}//iteration skipped.
 		$i++;
 		} //endforeach
 
 	//Dump HTA======================================================
-	$myloc = getcwd(); // Save the current directory
-	chdir($sdr);
-	if(!unlink($sdr.'/.htaccess')) $flogt .="\r\nCould not shift HTA";
-		else $flogt .="\r\nShifted HTA";
-	chdir($myloc); // Restore the old working directory 
-	$proceed = false;
-	echo $flogt .= "\r\nProceedure end: Expands should be completed.";
-	//echo "$flogt";
-//	echo fprintf($flog,"\r\n%s",$flogt);
-//	exit;
+		$myloc = getcwd(); // Save the current directory
+		chdir($sdr);
+		$flogtu="";
+		if(!unlink($sdr.'/.htaccess')) $flogtu .="\r\nCould not shift HTA"; else $flogtu .="\r\nShifted HTA";
+		chdir($myloc);   // Restore the old working directory 
+		$proceed = false;
+		echo $flogt .= $flogtf.$flogtu."\r\nProceedure end: Expands should be completed.";
+	//	exit;
 	} // endwhile
-//	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //	~~~Change to eShop/index.htm~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	if(!file_exists($sdr.'/wp-config.php')) {
 		$flogt .="\r\n$sdr"."/wp-config.php Not Present....";
 	} else {
-//	$proceed = true; 
-//	while ($proceed) {
-//	if ($proceed) {
-		echo $flogt .= "\r\nStarting Data Search and Set...............";
+		$flogt .= "\r\nStarting Data Search and Set...............";
 		//::::::::SAFE COPY IndexPHP, Db, HTAccess, WPConfig, PincSet::::::::
 			copy($sdr .'/install/indx2root.php',   $sdr.'/install/PREindex.php');
 			copy($sdr .'/install/.htaccss2root.txt',$sdr.'/install/.PREhtaccess');
@@ -73,9 +65,11 @@ if(empty($cppazz)) {
 
 		//::::::::SEARCH REPLACE and BUILD Database & Webfiles:::::::::::::::
 			$s = "https://$doomain/install/cp_PREsearchreplOLDsiteV2.php";
+			$flogt .="\r\n-Sur point de>".$s;
 			$f = file_get_contents($s);
 			@fclose($f);
 			$s ="https://$doomain/install/cp_POSsearchreplNEWsiteV2.php?wbt=$webtitle&dbx=$dbsffx&dpz=$dbpazz&cpk=$cppazz";
+			$flogt .="\r\n-Sur point de>".$s;
 			$f = file_get_contents($s);
 			@fclose($f);
 			$flogt .="\r\nPRE S&R should be completed.....";
@@ -88,24 +82,74 @@ if(empty($cppazz)) {
 			copy($sdr .'/install/PREmmtw-pincset.php',$sdr.'/eShop/share/mmtw-pincset.php');
 			$flogt .="\r\nPRE Destinations should be in place.....";
 
-		//::::::::Setup Database Creation::::::::::::::::::::::::::::::::::::
-			$s ="http://$doomain/install/cp_DBcreateV4.php?dbx=$dbsffx&dpz=$dbpazz&cpu=$cpuser&cpk=$cppazz&dbsql=$fsql";
+
+		//::::::::Setup BizEmail Forwarding::::::::::::::::::::::::::::::::::
+			$s = "https://$cpuser:".urlencode(urldecode($cppazz))."@$doomain:2083/frontend/$cpskin/mail/doaddpop.html?email=support&domain=$doomain&password=".urlencode(urldecode($cppazz))."&quota=100";
 			$f = file_get_contents($s);
+			$s = "https://$cpuser:".urlencode(urldecode($cppazz))."@$doomain:2083/frontend/$cpskin/mail/doaddfwd.html?email=support&domain=$doomain&password=".urlencode(urldecode($cppazz))."&fwdopt=fwd&fwdemail=".urlencode(urldecode($fwdeml));
+			$f = file_get_contents($s);
+			$flogt .="\r\n-Sur point de>".$s;
+			@fclose($f);
+			$flogt .="\r\nBizEmail Forwarding should be completed.....";
+
+
+		//::::::::Setup Database Creation::::::::::::::::::::::::::::::::::::
+			$proceed = false;
+			$s = "https://$cpuser:".urlencode(urldecode($cppazz))."@$doomain:2083/frontend/$cpskin/sql/addb.html?db=$dbsffx";
+			$flogt .="\r\n-Sur point de>".$s;
+			$f = file_get_contents($s);
+			$s = "https://$cpuser:".urlencode(urldecode($cppazz))."@$doomain:2083/frontend/$cpskin/sql/adduser.html?user=$dbsffx&pass=$dbpazz";
+			$flogt .="\r\n-Sur point de>".$s;
+			$f = file_get_contents($s);
+			$s = "https://$cpuser:".urlencode(urldecode($cppazz))."@$doomain:2083/frontend/$cpskin/sql/addusertodb.html?user=$cpuser"."_"."$dbsffx&db=$cpuser"."_"."$dbsffx&privileges=ALL";
+			$flogt .="\r\n-Sur point de>".$s;
+			$f = file_get_contents($s);
+			if(isset($f) && !empty($f)) $proceed = true;
 			@fclose($f);
 			$flogt .="\r\nDbcreation should be completed.....";
 
-		//::::::::Setup BizEmail Forwarding::::::::::::::::::::::::::::::::::
-			$s ="http://$doomain/install/cp_BZEMLcreateV4.php?cpu=$cpuser&cpk=$cppazz&fwd=$fwdeml";
-			$f = file_get_contents($s);
-			@fclose($f);
-			$flogt .="\r\nBizEmail Forwarding should be completed.....";
-//	} else { 
-//		$flogt .= "\r\nSearchReplace and DbCreate did not start.";
-//	}
-	//	exit;
-//	}// endwhile
-	}//end ifconfigpressent//////cpbzemailcreate.php?cpk={$cppazz}&fwd={$fwdemail}"
-} //end Absent Key
+		################################################################
+		# Mysql Database Pop 1.0 {{*Code below should not be changed*}}#
+		################################################################
+		if ($proceed) {
+			$file3          = $dbscript;
+			$mysql_host     = $doomain; 
+			$mysql_username = $cpuser;
+			$mysql_password = $cppazz;
+			$mysql_database = $cpuser.'_'.$dbsffx;
+			$conn = new mysqli($mysql_host, $mysql_username, $mysql_password, $mysql_database); //connect to the MySQL server
+			// check connection
+			if (mysqli_connect_errno()) {
+				exit('<br/>Connecting to MySQL server failed: '. mysqli_connect_error());
+			} else {
+				mysqli_query($conn, 'Use '.$mysql_database.';');
+				echo '<br/>Calm cool CONNECTED!!!';
+			
+				if (!file_exists($file3)) {
+					echo "\n" . $file3 . ' not exist.' . "\n";
+				} else {
+					$sql = '';   
+					$lines = file($file3);  //read entire sql file	 
+					foreach ($lines as $line_num => $line) { // loop through line
+						if (substr($line, 0, 2) != '--' &&  substr($line, 0, 15)!= 'CREATE DATABASE' &&  substr($line, 0, 3) != 'USE' &&  $line != ''){ // continue if not Commented
+							$sql .= $line;                              // add this line to current segment
+							if (substr(trim($line), -1, 1) == ';') {    // semicolon ends a query
+								if (! mysqli_query($conn, $sql) )  {    // if (! $conn->query($sql) === TRUE) {
+									echo '<br />Error performing:' . $sql . ' -----  : ' . mysqli_error($conn);
+								} else {
+									//print('<br/>Performed query: ' . $sql);
+								}
+								$sql = '';
+							}
+						}
+					} //end foreach
+				} //end if!fileexist
+			mysqli_close($conn);
+			} //if no conn err
+		}
+	}//end ifconfigpressent
+} //end Empty CPAZZ 
+
 echo $flogt .= "\r\nProceedure end - (Data:$dbsffx)";
 echo fprintf($flog,"\r\n%s",$flogt);
 ?>

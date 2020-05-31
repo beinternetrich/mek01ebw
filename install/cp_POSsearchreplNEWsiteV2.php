@@ -5,7 +5,7 @@
 ###############################################################
 # Visit http://www.zubrag.com/scripts/ for updates
 ############################################################### 
-$flogt= "\r\nPostReplace Log~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+$flogt .= "\r\nPostReplace Log~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 //---------------------------------------------------------------------
 // Init Vars
 $startpath    = $_SERVER['DOCUMENT_ROOT'];
@@ -58,8 +58,7 @@ $webphonePRE  => $webphone,
 $cppazzPRE    => $cppazz,
 $dbpazzPRE    => $dbpazz,
 $dbsufxPRE    => $dbsufx);
-  
-//$reportto = "mitchymitchy"."33@gm"."ail.com";
+
 define('RECURSE',true);
 // _________________________________________________________________ //
 
@@ -67,25 +66,7 @@ if (!file_exists($startpath)) {
   die("Folder \"" . $startpath . "\" does not exist.");
 }
 dir_replace($startpath);     // start replacement
-//$etime = time();             // record end time
-//$headers  = "MIME-Version: 1.0\r\n";  // setup message and email results
-//$headers .= "Content-type: text/plain; charset=\"us-ascii\"\r\n";
-//$headers .= "From: " . $reportto . "\r\n";
-//$headers .= "Reply-To: " . $reportto . "\r\n";
-//$headers .= 'X-Mailer: PHP/' . phpversion();
-//$message = "Mitch,
-// Replacement script was run. Please see results below:
-// Files processed: $files_processed
-// Files updated: $files_updated
-// Files not updated (error ocurred): $files_not_updated
-// Processing time: " . date('i:s',$etime - $stime);
-//
-//if ($reportto != '') {          // send email @
-//  mail($reportto,               // TO email
-//        'POST Replace results', // subject
-//        $message . '\r\n' . $msgrepl,   // email text
-//        $headers);              // headers
-//}
+
 //-------------------------------------
 // recurse folders
 function dir_replace ($dirname, $recursive = RECURSE) {
@@ -104,7 +85,7 @@ function dir_replace ($dirname, $recursive = RECURSE) {
 					if (fnmatch('cp_POSsearchreplNEWsiteV2.php', $file)) {
 					} else {
 					file_replace($dirname.'/'.$file);
-					echo $flogt .= "\r\nFile_replace (L113) $dirname $file now";
+					$flogt .= "\r\nFile_replace (L99) $dirname $file now";
 					}
 			}
 		}//endiffile
@@ -137,8 +118,7 @@ function file_replace ($filename) {
 	if ($f) {
       @fputs($f,$txt);                             // save file contents
       @fclose($f);
-	  $msgrepl .= "<br>Updated file ".$filename."\r\n";
-	  echo $flogt .= "\r\nUpdated file ".$filename;
+	  $msgrepl .= "\r\nUpdated file ".$filename;   echo " -Updated file ".$filename;
       $files_updated++;                            // increment updated files counter
     }
     else {
@@ -158,5 +138,5 @@ function str_replace_assoc($array,$string){
     }
     return str_replace($from_array,$to_array,$string);
 }
-echo $flogt .= "\r\nPOSTReplace Complete";
+$flogt .= "\r\nPOSTReplace Complete";
 echo fprintf($flog,"\r\n%s",$flogt);?>

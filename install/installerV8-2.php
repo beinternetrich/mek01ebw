@@ -93,9 +93,9 @@ if(empty($cppazz)) {
 	$proceed = true;
 	if ($proceed) {
 		//::::::::Setup BizEmail Forwarding::::::::::::::::::::::::::::::::::
-			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/email_accounts/index.html?email=$dbsffx&domain=$doomain&password=$cppazz&quota=100";
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/email_accounts/index.html?email=support&domain=$doomain&password=$cppazz&quota=100";
 			$c = exec("$curl_path '$s'");
-			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/mail/doaddfwd.html?email=$dbsffx&domain=$doomain&password=$cppazz&fwdopt=fwd&fwdemail=$fwdeml";
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/mail/doaddfwd.html?email=support&domain=$doomain&password=$cppazz&fwdopt=fwd&fwdemail=$fwdeml";
 			$c = exec("$curl_path '$s'");
 			$flogt .="\r\nBizEmail Forwarding should be completed.....";
 

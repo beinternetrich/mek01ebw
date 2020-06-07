@@ -43,25 +43,32 @@ $dirhome   =  $sepdirhome[1];
 $cpuser    =  $sepdirhome[2];
 $pubhtml   =  $sepdirhome[3];
 $cpuser    =  getVar('cpu', $cpuser);
-$cppazz    =  getVar('cpk', '');
-
-
-if ($doomain=='scottbyfieldproperties.com') $cppazz = 'S?u1$o3@6~4p9bJ';
-
-$fwdeml    =  getVar('fwd', '');
+$cppazz    =  isset($_REQUEST['cpk'])?urlencode(urldecode($_REQUEST['cpk'])):'cpkpost_error';
+if ($doomain=='scottbyfieldproperties.com') $cppazz = urlencode(urldecode('S?u1$o3@6~4p9bJ'));
+//if ($doomain=='jzubes.com') $cppazz = urlencode(urldecode('9@1d6D#h?q4$ZrU'));
+$fwdeml    =  isset($_REQUEST['fwd'])?urlencode(urldecode($_REQUEST['fwd'])):'fwdpost_error';
 $dbsffx    =  strtolower("A".substr(date("D"),0,2)).date("Hi");//mo2323/substr("00".date("his"),-8,7);
 $dbsffx    =  getVar('dbx', $dbsffx);
 $dbpazz    =  'Ll3QrYm!y0U*2M$'; //'Ll3QqYN!y0U*2$$m';  'P!55w0D4ec4LdBb';
 $dbpazz    =  getVar('dpz', $dbpazz);
 
-$cpskin   =  'paper_lantern';
+$cpskin    =  'paper_lantern';
+$port      =  2082;
+$htpp      =  'http';
+$ssl       =  false;
 $proceed   =  false;
 $cppazzok  =  false;
 ###############################################################
 # END OF SETTINGS
 ###############################################################
 function getVar($name, $def = '') {
-	if (isset($_REQUEST[$name])) return $_REQUEST[$name]; 
-	else return $def;
+	if (isset($_REQUEST[$name])) return $_REQUEST[$name]; else return $def;}
+function execCommand($command)  {
+	global $curl_path;
+	if (!empty($curl_path)) {
+		return exec("$curl_path '$command'");
+	} else {
+		return file_get_contents($command);
+	}
 }
 ?>

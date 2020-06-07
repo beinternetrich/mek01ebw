@@ -1,16 +1,22 @@
-<?php require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
+<?php 
+require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
+//require $_SERVER['DOCUMENT_ROOT'].'/install/cPanel.php';
 //MMTECHWORKS WEBSCRIPT - MMTW.V8.20200525.0101
 //:::::::::::::::::::::::::::EXPAND, SR, CREA::::::::::::::::::::::::::
-$flogt .= "\r\nExpand, S-R-Db."."\r\nCPK > $cppazz \r\nSDR > $sdr";
+$flogt .= "\r\n -cppazz) $cppazz<<<\r\n -fwdeml) $fwdeml<<<<";
 //---------------------------------------------------------------------
+$curl_path = '/usr/bin/curl';
 if(empty($cppazz)) {  
-	$flogt .= "\r\nKey failure. Aborting Expand & Dataset!";
+	$flogt .= "\r\nKey fail > $cppazz"; //Key failure. Aborting!";  // Expand & Dataset!";
 } else {
-	$flogt .= "\r\nKey present. Continue Foreach Dlod!";
+	$flogt .= "\r\nKey present> $cppazz"; //. Continue Foreach Dlod!";
 	$proceed = true; 
 //	$proceed = false; //DO.NOT.RUN DOWNLOAD/EXPAND
-	while ($proceed) {
 	$i=0;  $res=false; $flogtf="";
+	while ($proceed && $i<=1) {
+//	$i++;
+	echo "\r\nIn while...";
+//	$i=0;  $res=false; $flogtf="";
 		foreach($rowsets as $rowset) { 
 			$srcfile  = $rowset[1];
 			$instpath = dirname(__FILE__).$rowset[2]; //$pathpath = getcwd()
@@ -22,6 +28,7 @@ if(empty($cppazz)) {
 						$flogtf .="\r\nError locating $srcfile";
 					} else { 
 						$zip = new ZipArchive;
+//Unpack the ZIP file =========================================================
 						$res = $zip->open($instpath.$srcfile);  ///REMREMREM
 						if ($res === TRUE) {
 							$zip->extractTo($destpath); 
@@ -38,7 +45,7 @@ if(empty($cppazz)) {
 		$i++;
 		} //endforeach
 
-	//Dump HTA======================================================
+//Dump HTA======================================================
 		$myloc = getcwd(); // Save the current directory
 		chdir($sdr);
 		$flogtu="";
@@ -53,7 +60,7 @@ if(empty($cppazz)) {
 	if(!file_exists($sdr.'/wp-config.php')) {
 		$flogt .="\r\n$sdr"."/wp-config.php Not Present....";
 	} else {
-		$flogt .= "\r\nStarting Data Search and Set...............";
+		$flogt .="\r\n$sdr"."/wp-config.php IS found. Starting Search and Set...............";
 		//::::::::SAFE COPY IndexPHP, Db, HTAccess, WPConfig, PincSet::::::::
 			copy($sdr .'/install/indx2root.php',   $sdr.'/install/PREindex.php');
 			copy($sdr .'/install/.htaccss2root.txt',$sdr.'/install/.PREhtaccess');
@@ -82,47 +89,55 @@ if(empty($cppazz)) {
 			copy($sdr .'/install/PREmmtw-pincset.php',$sdr.'/eShop/share/mmtw-pincset.php');
 			$flogt .="\r\nPRE Destinations should be in place.....";
 
-
+	$curl_path = '/usr/bin/curl';
+	$proceed = true;
+	if ($proceed) {
 		//::::::::Setup BizEmail Forwarding::::::::::::::::::::::::::::::::::
-			$s = "https://$cpuser:".urlencode(urldecode($cppazz))."@$doomain:2083/frontend/$cpskin/mail/doaddpop.html?email=support&domain=$doomain&password=".urlencode(urldecode($cppazz))."&quota=100";
-			$f = file_get_contents($s);
-			$s = "https://$cpuser:".urlencode(urldecode($cppazz))."@$doomain:2083/frontend/$cpskin/mail/doaddfwd.html?email=support&domain=$doomain&password=".urlencode(urldecode($cppazz))."&fwdopt=fwd&fwdemail=".urlencode(urldecode($fwdeml));
-			$f = file_get_contents($s);
-			$flogt .="\r\n-Sur point de>".$s;
-			@fclose($f);
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/email_accounts/index.html?email=$dbsffx&domain=$doomain&password=$cppazz&quota=100";
+			$c = exec("$curl_path '$s'");
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/mail/doaddfwd.html?email=$dbsffx&domain=$doomain&password=$cppazz&fwdopt=fwd&fwdemail=$fwdeml";
+			$c = exec("$curl_path '$s'");
 			$flogt .="\r\nBizEmail Forwarding should be completed.....";
 
+/**
+			$emailAccount = new emailAccount($doomain, $cpuser, $cppazz, $port, $ssl = false, $cpskin, 'support55@'.$doomain);
+			$yoForward = $emailAccount->addForwarder($fwdeml);
+			$cPanel = new cpanel($doomain, $cpuser, $cppazz, $port, $ssl = false, $cpskin);
+			$go     = $cPanel->listDatabases();
+			var_dump($go);
+			if ($go) {
+				echo "\r\neSuccess Handle"; 
+			} else {
+				echo "\r\neFail Handle";
+			}
+**/
 
 		//::::::::Setup Database Creation::::::::::::::::::::::::::::::::::::
-			$proceed = false;
-			$s = "https://$cpuser:".urlencode(urldecode($cppazz))."@$doomain:2083/frontend/$cpskin/sql/addb.html?db=$dbsffx";
-			$flogt .="\r\n-Sur point de>".$s;
-			$f = file_get_contents($s);
-			$s = "https://$cpuser:".urlencode(urldecode($cppazz))."@$doomain:2083/frontend/$cpskin/sql/adduser.html?user=$dbsffx&pass=$dbpazz";
-			$flogt .="\r\n-Sur point de>".$s;
-			$f = file_get_contents($s);
-			$s = "https://$cpuser:".urlencode(urldecode($cppazz))."@$doomain:2083/frontend/$cpskin/sql/addusertodb.html?user=$cpuser"."_"."$dbsffx&db=$cpuser"."_"."$dbsffx&privileges=ALL";
-			$flogt .="\r\n-Sur point de>".$s;
-			$f = file_get_contents($s);
-			if(isset($f) && !empty($f)) $proceed = true;
-			@fclose($f);
+//			$proceed = false;
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/sql/addb.html?db=$dbsffx";
+			$c = exec("$curl_path '$s'");
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/sql/adduser.html?user=$dbsffx&pass=$dbpazz";
+			$c = exec("$curl_path '$s'");
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/sql/addusertodb.html?user=$cpuser"."_"."$dbsffx&db=$cpuser"."_"."$dbsffx&privileges=ALL";
+			$c = exec("$curl_path '$s'");
+			if(isset($c) && !empty($c)) $proceed = true;
 			$flogt .="\r\nDbcreation should be completed.....";
-
+	}
 		################################################################
 		# Mysql Database Pop 1.0 {{*Code below should not be changed*}}#
 		################################################################
+		$proceed = true;
 		if ($proceed) {
 			$file3          = $dbscript;
 			$mysql_host     = $doomain; 
-			$mysql_username = $cpuser;
-			$mysql_password = $cppazz;
-			$mysql_database = $cpuser.'_'.$dbsffx;
-			$conn = new mysqli($mysql_host, $mysql_username, $mysql_password, $mysql_database); //connect to the MySQL server
-			// check connection
+			$mysql_uname    = $cpuser.'_'.$dbsffx; //$cpuser;
+			$mysql_pword    = $dbpazz; //$cppazz;
+			$mysql_dbase    = $cpuser.'_'.$dbsffx;
+			$conn = new mysqli($mysql_host, $mysql_uname, $mysql_pword, $mysql_dbase); //connect to the MySQL server
 			if (mysqli_connect_errno()) {
 				exit('<br/>Connecting to MySQL server failed: '. mysqli_connect_error());
 			} else {
-				mysqli_query($conn, 'Use '.$mysql_database.';');
+				mysqli_query($conn, 'Use '.$mysql_dbase.';');
 				echo '<br/>Calm cool CONNECTED!!!';
 			
 				if (!file_exists($file3)) {
@@ -131,7 +146,12 @@ if(empty($cppazz)) {
 					$sql = '';   
 					$lines = file($file3);  //read entire sql file	 
 					foreach ($lines as $line_num => $line) { // loop through line
-						if (substr($line, 0, 2) != '--' &&  substr($line, 0, 15)!= 'CREATE DATABASE' &&  substr($line, 0, 3) != 'USE' &&  $line != ''){ // continue if not Commented
+						if (substr($line, 0, 2) != '--' 
+						&&  substr($line, 0, 15)!= 'CREATE DATABASE' 
+						&&  substr($line, 0, 3) != 'USE' 
+//						&&  substr($line, 0, 2) != '//' 
+//						&&  substr($line, 0, 2) != '/*' 
+						&&  $line != ''){ // continue if not Commented
 							$sql .= $line;                              // add this line to current segment
 							if (substr(trim($line), -1, 1) == ';') {    // semicolon ends a query
 								if (! mysqli_query($conn, $sql) )  {    // if (! $conn->query($sql) === TRUE) {

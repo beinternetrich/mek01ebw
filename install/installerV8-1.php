@@ -12,9 +12,10 @@ if(!empty($cppazz)) $proceed = true; else $flogt .="\r\nKey failure. Aborting al
 			if ($i <= 1) { } else {
 				$dlodsrc  = substr($rowset[0], 0, 1) === 'y'? true: false;
 				if(!empty($srcfile) && $dlodsrc) {
+//Download the ZIP file======================================
 					if(!copy($skel.$srcfile, $instpath.$srcfile)) 
-					//$flogt .="\r\nError copying $srcfile to $instpath$srcfile";
-					$flogt .="\r\nWorkable - $instpath$srcfile";
+						$flogt .="\r\nError copying $srcfile to $instpath$srcfile";
+						//$flogt .="\r\nWorkable - $instpath$srcfile";
 				} else {
 					$flogt .="\r\nSkipping $srcfile. Next!!";
 				}

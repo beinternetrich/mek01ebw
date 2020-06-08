@@ -2,5 +2,7 @@
 *.zip
 /dump/
 /install/dump/
+/install/_notes/
 /_notes/
 *.yml
+dwsync.xml

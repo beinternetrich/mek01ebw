@@ -30,6 +30,7 @@ $rowsets= array(
 ###############################################################
 $doomain   =  $_SERVER['HTTP_HOST'];
 $doomain   =  getVar('dom', $doomain);
+$doomainip =  getVar('dip', $doomain);
 $doomaintag= "Tap Into The Secret Goldmine of PLR!";
 
 $sepdomain =  explode(".", $doomain);
@@ -45,7 +46,7 @@ $pubhtml   =  $sepdirhome[3];
 $cpuser    =  getVar('cpu', $cpuser);
 $cppazz    =  isset($_REQUEST['cpk'])?urlencode(urldecode($_REQUEST['cpk'])):'cpkpost_error';
 if ($doomain=='scottbyfieldproperties.com') $cppazz = urlencode(urldecode('S?u1$o3@6~4p9bJ'));
-//if ($doomain=='jzubes.com') $cppazz = urlencode(urldecode('9@1d6D#h?q4$ZrU'));
+if ($doomain=='jzubes.com')                 $cppazz = urlencode(urldecode('9@1d6D#h?q4$ZrU'));
 $fwdeml    =  isset($_REQUEST['fwd'])?urlencode(urldecode($_REQUEST['fwd'])):'fwdpost_error';
 $dbsffx    =  strtolower("A".substr(date("D"),0,2)).date("Hi");//mo2323/substr("00".date("his"),-8,7);
 $dbsffx    =  getVar('dbx', $dbsffx);

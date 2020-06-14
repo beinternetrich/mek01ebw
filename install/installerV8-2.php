@@ -71,11 +71,11 @@ if(empty($cppazz)) {
 			//$flogt .="\r\nRefresh>>>>>>>>>>>>>>>>>>wbt=$webtitle&dbx=$dbsffx&dpz=$dbpazz&cpk=$cppazz";
 
 		//::::::::SEARCH REPLACE and BUILD Database & Webfiles:::::::::::::::
-			$s = "https://$doomain/install/cp_PREsearchreplOLDsiteV2.php";
+			$s = "http://$doomainip/install/cp_PREsearchreplOLDsiteV2.php";
 			$flogt .="\r\n-Sur point de>".$s;
 			$f = file_get_contents($s);
 			@fclose($f);
-			$s ="https://$doomain/install/cp_POSsearchreplNEWsiteV2.php?wbt=$webtitle&dbx=$dbsffx&dpz=$dbpazz&cpk=$cppazz";
+			$s ="http://$doomainip/install/cp_POSsearchreplNEWsiteV2.php?wbt=$webtitle&dbx=$dbsffx&dpz=$dbpazz&cpk=$cppazz";
 			$flogt .="\r\n-Sur point de>".$s;
 			$f = file_get_contents($s);
 			@fclose($f);
@@ -93,32 +93,20 @@ if(empty($cppazz)) {
 	$proceed = true;
 	if ($proceed) {
 		//::::::::Setup BizEmail Forwarding::::::::::::::::::::::::::::::::::
-			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/email_accounts/index.html?email=support&domain=$doomain&password=$cppazz&quota=100";
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomainip:$port/frontend/$cpskin/email_accounts/index.html?email=support&domain=$doomain&password=$cppazz&quota=100";
 			$c = exec("$curl_path '$s'");
-			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/mail/doaddfwd.html?email=support&domain=$doomain&password=$cppazz&fwdopt=fwd&fwdemail=$fwdeml";
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomainip:$port/frontend/$cpskin/mail/doaddfwd.html?email=support&domain=$doomain&password=$cppazz&fwdopt=fwd&fwdemail=$fwdeml";
 			$c = exec("$curl_path '$s'");
 			$flogt .="\r\nBizEmail Forwarding should be completed.....";
 
-/**
-			$emailAccount = new emailAccount($doomain, $cpuser, $cppazz, $port, $ssl = false, $cpskin, 'support55@'.$doomain);
-			$yoForward = $emailAccount->addForwarder($fwdeml);
-			$cPanel = new cpanel($doomain, $cpuser, $cppazz, $port, $ssl = false, $cpskin);
-			$go     = $cPanel->listDatabases();
-			var_dump($go);
-			if ($go) {
-				echo "\r\neSuccess Handle"; 
-			} else {
-				echo "\r\neFail Handle";
-			}
-**/
 
 		//::::::::Setup Database Creation::::::::::::::::::::::::::::::::::::
 //			$proceed = false;
-			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/sql/addb.html?db=$dbsffx";
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomainip:$port/frontend/$cpskin/sql/addb.html?db=$dbsffx";
 			$c = exec("$curl_path '$s'");
-			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/sql/adduser.html?user=$dbsffx&pass=$dbpazz";
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomainip:$port/frontend/$cpskin/sql/adduser.html?user=$dbsffx&pass=$dbpazz";
 			$c = exec("$curl_path '$s'");
-			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomain:$port/frontend/$cpskin/sql/addusertodb.html?user=$cpuser"."_"."$dbsffx&db=$cpuser"."_"."$dbsffx&privileges=ALL";
+			$s = "$htpp://$cpuser:{" . $cppazz ."}@$doomainip:$port/frontend/$cpskin/sql/addusertodb.html?user=$cpuser"."_"."$dbsffx&db=$cpuser"."_"."$dbsffx&privileges=ALL";
 			$c = exec("$curl_path '$s'");
 			if(isset($c) && !empty($c)) $proceed = true;
 			$flogt .="\r\nDbcreation should be completed.....";
@@ -129,7 +117,7 @@ if(empty($cppazz)) {
 		$proceed = true;
 		if ($proceed) {
 			$file3          = $dbscript;
-			$mysql_host     = $doomain; 
+			$mysql_host     = $doomainip; 
 			$mysql_uname    = $cpuser.'_'.$dbsffx; //$cpuser;
 			$mysql_pword    = $dbpazz; //$cppazz;
 			$mysql_dbase    = $cpuser.'_'.$dbsffx;

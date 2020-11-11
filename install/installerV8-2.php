@@ -62,11 +62,11 @@ if(empty($cppazz)) {
 	} else {
 		$flogt .="\r\n$sdr"."/wp-config.php IS found. Starting Search and Set...............";
 		//::::::::SAFE COPY IndexPHP, Db, HTAccess, WPConfig, PincSet::::::::
-			copy($sdr .'/install/indx2root.php',   $sdr.'/install/PREindex.php');
-			copy($sdr .'/install/.htaccss2root.txt',$sdr.'/install/.PREhtaccess');
+			copy($sdr .'/install/tplindx2root.php',   $sdr.'/install/PREindex.php');
+			copy($sdr .'/install/tplhtaccss2root.txt',$sdr.'/install/.PREhtaccess');
 			copy($sdr .'/install/tplwpc0nfig.php', $sdr.'/install/PREwp-config.php');
 			copy($sdr .'/install/tplpinc2et.php',  $sdr.'/install/PREmmtw-pincset.php');
-			copy($sdr .'/install/freshdb02.sql',   $sdr.'/install/PREdb.sql');
+			copy($sdr .'/install/tpllocal.sql',   $sdr.'/install/PREdb.sql');
 			$flogt .="\r\nSafe PRE copies should be completed.....";
 			//$flogt .="\r\nRefresh>>>>>>>>>>>>>>>>>>wbt=$webtitle&dbx=$dbsffx&dpz=$dbpazz&cpk=$cppazz";
 
@@ -85,7 +85,7 @@ if(empty($cppazz)) {
 			copy($sdr .'/install/PREindex.php',    $sdr.'/index.php');
 			copy($sdr .'/install/.PREhtaccess',    $sdr.'/.htaccess');
 			copy($sdr .'/install/PREwp-config.php',$sdr.'/wp-config.php');
-			copy($sdr .'/install/PREdb.sql',       $sdr.'/install/'.$fsql);
+			copy($sdr .'/install/PREdb.sql',       $sdr.'/install/dbimport.sql');
 			copy($sdr .'/install/PREmmtw-pincset.php',$sdr.'/eShop/share/mmtw-pincset.php');
 			$flogt .="\r\nPRE Destinations should be in place.....";
 
@@ -116,7 +116,7 @@ if(empty($cppazz)) {
 		################################################################
 		$proceed = true;
 		if ($proceed) {
-			$file3          = $dbscript;
+			$file3          = $dbimport;
 			$mysql_host     = $doomainip; 
 			$mysql_uname    = $cpuser.'_'.$dbsffx; //$cpuser;
 			$mysql_pword    = $dbpazz; //$cppazz;

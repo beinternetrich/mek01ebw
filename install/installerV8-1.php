@@ -9,7 +9,7 @@ if(!empty($cppazz)) $proceed = true; else $flogt .="\r\nKey failure. Aborting al
 			$instpath = dirname(__FILE__).$rowset[2]; //$pathpath = getcwd()
 			$destpath = dirname(__FILE__).$rowset[3];
 			//$flogt .= "\r\nFor $srcfile";  
-			if ($i <= 1) { } else {
+			if ($i <= 0) { } else {
 				$dlodsrc  = substr($rowset[0], 0, 1) === 'y'? true: false;
 				if(!empty($srcfile) && $dlodsrc) {
 //Download the ZIP file======================================

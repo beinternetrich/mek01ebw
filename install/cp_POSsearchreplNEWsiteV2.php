@@ -1,10 +1,11 @@
-<?php require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
-//MMTECHWORKS WEBSCRIPT - MMTW.V8.20200528.0101
+<?php //require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
 ###############################################################
-# Recursive Text Replacer 2.04(MMTW)
+# Recursive Text Replacer 2.04(MMTW.V13.20201028.0101)
 ###############################################################
 # Visit http://www.zubrag.com/scripts/ for updates
 ############################################################### 
+//ErrorLog
+$flog = fopen("flog.log","a");
 $flogt .= "\r\nPostReplace Log~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 //---------------------------------------------------------------------
 // Init Vars
@@ -15,17 +16,16 @@ $dirhomef1PRE = '/HOM3D1R/CPUS3R';
 $dirhomef1    = '/'.$sepdirhome[1].'/'.$sepdirhome[2];
 $dirhomef2PRE = '/HOM3D1R\\/CPUS3R'; 
 $dirhomef2    = '/'.$sepdirhome[1].'\\/'.$sepdirhome[2];
-
-$defemailPRE  = 'DEF3ML';
-$defemail     = 'support@'.$_SERVER['HTTP_HOST'];
 $cpuserPRE    = 'CPUS3R';  
 $cpuser       =  $sepdirhome[2];
 $dldstickPRE  = 'DLDST1K';
 $dldstick     = 'https://d0wnload.digitalcrazy.biz/niches';
-$htadoomainPRE= 'HTACPHoST'; 
-$htadoomain   = str_replace(".", "\.", $_SERVER['HTTP_HOST']);
 $doomainPRE   = 'CPH0ST'; 
 $doomain      = strtolower($_SERVER['HTTP_HOST']);
+$defemailPRE  = 'DEF3ML';
+$defemail     = 'support@'.$_SERVER['HTTP_HOST'];
+$htadoomainPRE= 'HTACPHoST'; 
+$htadoomain   = str_replace(".", "\.", $_SERVER['HTTP_HOST']);
 $webtitlePRE  = 'W3BTITLE'; 
 $webtitle     = str_replace('+', ' ', ucwords($_GET['wbt']));
 $webphonePRE  = 'W3BPH0NE'; 
@@ -139,4 +139,5 @@ function str_replace_assoc($array,$string){
     return str_replace($from_array,$to_array,$string);
 }
 $flogt .= "\r\nPOSTReplace Complete";
-echo fprintf($flog,"\r\n%s",$flogt);?>
+echo fprintf($flog,"\r\n%s",$flogt);
+?>

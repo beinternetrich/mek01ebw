@@ -1,10 +1,11 @@
-<?php require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
-//MMTECHWORKS WEBSCRIPT - MMTW.V8.20200528.0101
+<?php //require $_SERVER['DOCUMENT_ROOT'].'/install/installerV8-0.php'; 
 ###############################################################
-# Recursive Text Replacer 2.04(MMTW)
+# Recursive Text Replacer 2.05(MMTW.V13.20201028.0101)
 ###############################################################
 # Visit http://www.zubrag.com/scripts/ for updates
 ############################################################### 
+//ErrorLog
+$flog = fopen("flog.log","a");
 $flogt .= "\r\nPreSearch Log~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 //---------------------------------------------------------------------
 // Init Vars
@@ -93,7 +94,7 @@ function dir_replace ($dirname, $recursive = RECURSE) {
 					if (fnmatch('cp_PREsearchreplOLDsiteV2.php', $file)) {
 					} else {
 					file_replace($dirname.'/'.$file);
-				$flogt .= "\r\nFile_replace (L116) $dirname"."/"."$file now";
+				$flogt .= "\r\nFile_replace (L96) $dirname"."/"."$file now";
 					}
 			}
 		}//endiffile

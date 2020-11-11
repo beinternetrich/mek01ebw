@@ -17,15 +17,15 @@ $flogt= "";
 ###############################################################
 $skel = "https://mmtw.s3.eu-west-2.amazonaws.com/dcrazy/mek01ebw/";
 //$skel   = "http://digitalcrazy.biz/mek01ebw/";
-$fsql   = 'db02.sql';
-$dbscript=  $_SERVER['DOCUMENT_ROOT'].'/install/'.$fsql;
+//$fsql   = 'db02.sql';
+$dbimport=  $_SERVER['DOCUMENT_ROOT'].'/install/'.'dbimport.sql';
 $rowsets= array(
 	array("dlodfilnum","Srcfiles","copyto", "unzipto"),
-	array("nfile01",  "N1in.zip", "/"        , "/"),
+//	array("nfile01",  "N1in.zip", "/"        , "/"),
 	array("yfile02",  "N2wp.zip", "/", "/../"),
-	array("yfile03",  "N3sh.zip", "/", "/../eShop/"),
-	array("yfile04",  "N4sh.zip", "/", "/../eShop/"),
-	array("yfile05",  "N5sh.zip", "/", "/../eShop/"),
+//	array("yfile03",  "N3sh.zip", "/", "/../eShop/"),
+//	array("yfile04",  "N4sh.zip", "/", "/../eShop/"),
+//	array("yfile05",  "N5sh.zip", "/", "/../eShop/"),
 	array("yfile06",  "N6sh.zip", "/", "/../eShop/")); 
 ###############################################################
 $doomain   =  $_SERVER['HTTP_HOST'];
